@@ -39,7 +39,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres://localhost/davidgram'),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'davidgram',
+        'USER': 'david',
+        'PASSWORD': 'kjh5270!@#@!',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
@@ -64,14 +71,15 @@ DJANGO_APPS = [
 ]
 THIRD_PARTY_APPS = [
     'crispy_forms',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'rest_framework',
+    'allauth',  # registration
+    'allauth.account',  #registration
+    'allauth.socialaccount',  #registration
+    'rest_framework',  #REST framework
 ]
 LOCAL_APPS = [
     'davidgram.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'davidgram.images.apps.ImagesConfig',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
