@@ -32,6 +32,8 @@ django_coverage_plugin = "==1.5.0"
 Pillow = "==5.1.0"
 Django = "==2.0.4"
 Werkzeug = "==0.14.1"
+django-taggit = "*"
+djangorestframework-jwt = "*"
 
 [dev-packages]
 pylint = "*"

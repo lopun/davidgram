@@ -75,11 +75,14 @@ THIRD_PARTY_APPS = [
     'allauth.account',  #registration
     'allauth.socialaccount',  #registration
     'rest_framework',  #REST framework
+    'taggit', #Tags for the photos
+
 ]
 LOCAL_APPS = [
     'davidgram.users.apps.UsersConfig',
     # Your stuff: custom apps go here
     'davidgram.images.apps.ImagesConfig',
+    'davidgram.notifications.apps.NotificationsConfig' #notifications app
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -246,3 +249,15 @@ SOCIALACCOUNT_ADAPTER = 'davidgram.users.adapters.SocialAccountAdapter'
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+TAGGIT_CASE_INTENSIVE = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}

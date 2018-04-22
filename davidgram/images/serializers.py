@@ -2,6 +2,18 @@ from rest_framework import serializers
 from . import models
 from davidgram.users import models as user_models
 
+class CountImageSerializer(serializers.ModelSerializer):
+
+  class Meta:
+    model = models.Image
+    fields =  (
+      'id',
+      'file',
+      'comment_count',
+      'like_count',
+    )
+
+
 class FeedUsersSerializer(serializers.ModelSerializer):
 
   class Meta:
@@ -45,5 +57,24 @@ class ImageSerializer(serializers.ModelSerializer):
       'caption',
       'comments',
       'like_count',
-      'creator'
+      'creator',
+      'created_at'
+    )
+
+class SmallImageSerializer(serializers.ModelSerializer):
+
+  class Meta:
+    model = models.Image
+    fields = (
+      'file',
+    )
+
+class InputImageSerializer(serializers.ModelSerializer):
+
+  class Meta:
+    model = models.Image
+    fields = (
+      'file',
+      'location',
+      'caption'
     )
