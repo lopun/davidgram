@@ -6,8 +6,8 @@ app_name = "images" #Django 2.0에서는 app_name을 써줘야 인식을 한다.
 urlpatterns = [
   url(
     regex=r'^$',
-    view=views.Feed.as_view(),
-    name='feed'
+    view=views.Images.as_view(),
+    name='Images'
   ),
   url(
     regex=r'^(?P<image_id>[0-9]+)/$',

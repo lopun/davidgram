@@ -10,7 +10,8 @@ urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, admin.site.urls),
     # User management
-    url(r'^api-token-auth', obtain_jwt_token),
+    url(r'^rest-auth/', include('rest_auth.urls')),
+    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     url(r"^users/", include("davidgram.users.urls", namespace="users")),
     url(r"^images/", include("davidgram.images.urls", namespace="images")),
     url(r'^notifications/', include('davidgram.notifications.urls', namespace='notifications')),
