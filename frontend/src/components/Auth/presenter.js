@@ -4,10 +4,7 @@ import styles from "./styles.scss";
 const Auth = (props, context) => (
   <main className={styles.auth}>
     <div className={styles.column}>
-      <img
-        src={require("images/phone.png")}
-        alt="Checkout our app. It is super cool"
-      />
+      <img src={require("images/phone.png")} alt="This app is soooo awesome!" />
     </div>
     <div className={styles.column}>
       <div className={styles.whiteBox}>
@@ -33,7 +30,7 @@ const Auth = (props, context) => (
                     className={styles.changeLink}
                     onClick={props.changeAction}
                   >
-                    Log in
+                    Sign up
                   </span>
                 </p>
               );
@@ -47,16 +44,15 @@ const Auth = (props, context) => (
         <div className={styles.appstores}>
           <img
             src={require("images/ios.png")}
-            alt="Download it on the Apple Appstore"
+            alt="Download it on the Apple's Appstore!"
           />
           <img
             src={require("images/android.png")}
-            alt="Download it on the Android Appstore"
+            alt="Download it on the Andriod's Appstore!"
           />
         </div>
       </div>
     </div>
   </main>
 );
-
 export default Auth;

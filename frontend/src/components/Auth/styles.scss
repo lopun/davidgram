@@ -41,3 +41,49 @@
     }
   }
 }
+
+// My Implementation Practice
+// .auth {
+//   width: 100%;
+//   max-width: $max-page-width;
+//   margin: 0 auto;
+//   min-height: 100%;
+//   margin-top: 30px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   .column {
+//     width: 40%;
+//     height: 100%;
+//     &:last-child {
+//       width: 35%;
+//       margin-left: 35px;
+//     }
+//     display: flex;
+//     flex-direction: column;
+//     .app-box {
+//       margin-top: 35px;
+//       flex-direction: column;
+//       .appstores {
+//         margin-top: 25px;
+//         img {
+//           height: 40px;
+//           &:first-child {
+//             margin-right: 15px;
+//           }
+//         }
+//       }
+//     }
+//   }
+//   .white-box {
+//     padding: 15px;
+//     text-align: center;
+//     @include boxBorder(no);
+//     p{
+//       margin: 15px;
+//       .change-link {
+//         color: $light-blue;
+//       }
+//     }
+//   }
+// }
