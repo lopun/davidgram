@@ -25,3 +25,10 @@
     }
   }
 }
+@mixin boxBorder($radius) {
+  border: 1px solid #e6e6e6;
+  background-color: white;
+  @if $radius == yes {
+    border-radius: 5px;
+  }
+}

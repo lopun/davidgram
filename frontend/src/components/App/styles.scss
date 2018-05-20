@@ -1,8 +1,12 @@
 @import "reset-css/reset.css";
-@import "../../config/_variables";
+@import "src/config/_variables";
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 
 body {
   background-color: $bg-color;
   font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: $normal-font-size;
+}
+img {
+  max-width: 100%;
 }
