@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import styles from "./styles.scss";
 
 const Footer = (props, context) => (
@@ -26,3 +27,29 @@ const Footer = (props, context) => (
 );
 
 export default Footer;
+=======
+
+const Footer = (props, context) => (
+  <footer>
+    <div>
+      <nav>
+        <ul>
+          <li>About us</li>
+          <li>Support</li>
+          <li>Blog</li>
+          <li>Press</li>
+          <li>API</li>
+          <li>Jobs</li>
+          <li>Privacy</li>
+          <li>Terms</li>
+          <li>Directory</li>
+          <li>Language</li>
+        </ul>
+      </nav>
+    </div>
+    <div>
+      <span>(c)nomadgram</span>
+    </div>
+  </footer>
+);
+>>>>>>> eeb01426793a037d3e1e31d8e573c3c51db43466

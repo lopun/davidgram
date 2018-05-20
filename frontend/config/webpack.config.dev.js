@@ -162,8 +162,12 @@ module.exports = {
                 options: {
                   importLoaders: 1,
                   modules: true,
+<<<<<<< HEAD
                   localIdentName: "[path][name]__[local]--[hash:base64:5]",
                   camelCase: "dashes"
+=======
+                  localIdentName: "[path][name]__[local]--[hash:base64:5]"
+>>>>>>> eeb01426793a037d3e1e31d8e573c3c51db43466
                 }
               },
               {
@@ -190,8 +194,13 @@ module.exports = {
               {
                 loader: require.resolve("sass-loader"),
                 options: {
+<<<<<<< HEAD
                   sourceMap: true,
                   data: `@import "C:/Users/david/Portfolio/CS/davidgram/frontend/src/config/_variables.scss";`
+=======
+                  sourceMap: true
+                  // data: `@import "C:/Users/david/Portfolio/CS/davidgram/frontend/config/_variables.scss";`
+>>>>>>> eeb01426793a037d3e1e31d8e573c3c51db43466
                 }
               }
             ]
