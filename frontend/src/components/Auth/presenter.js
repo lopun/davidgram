@@ -27,7 +27,7 @@ const Auth = (props, context) => (
           <p className={styles.text}>
             Have an account?{" "}
             <span className={styles.changeLink} onClick={props.changeAction}>
-              Sign up
+              Login
             </span>
           </p>
         )}

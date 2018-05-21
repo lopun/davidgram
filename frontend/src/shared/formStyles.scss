@@ -26,6 +26,10 @@
   .button {
     @include blueButton();
     /* icon을 의미한다. */
+    i {
+      font-size: 18px;
+      margin-right: 5px;
+    }
     svg {
       margin-right: 10px;
     }
@@ -58,13 +62,19 @@
     }
   }
   .facebook-link {
-    display: flex;
-    align-items: center;
     color: #385185;
     justify-content: center;
     margin-bottom: 25px;
-    svg {
+    cursor: pointer;
+    border: 0;
+    background-color: white;
+    font-size: $normal-font-size;
+    i {
+      font-size: $normal-font-size;
       margin-right: 5px;
+    }
+    &:active {
+      outline: none;
     }
   }
   .forgot-link {

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import LoginForm from "./presenter";
 
 class Container extends Component {
@@ -6,13 +7,16 @@ class Container extends Component {
     username: "",
     password: ""
   };
-
+  static propTypes = {
+    facebookLogin: PropTypes.func.isRequired
+  };
   render() {
     const { username, password } = this.state;
     return (
       <LoginForm
         handleInputChange={this._handleInputChange}
         handleSubmit={this._handleSubmit}
+        handleFacebookLogin={this._handleFacebookLogin}
         usernameValue={username}
         passwordValue={password}
       />
@@ -33,6 +37,10 @@ class Container extends Component {
   _handleSubmit = e => {
     e.preventDefault();
     // redux action
+  };
+
+  _handleFacebookLogin = response => {
+    console.log(response);
   };
 }
 
