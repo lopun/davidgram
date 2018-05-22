@@ -162,6 +162,7 @@ class Search(APIView):
 
     hashtags = request.query_params.get('hashtags', None)
 
+    # hashtags가 None이면 split이 안되기 때문!
     if hashtags is not None:
 
       hashtags = hashtags.split(",")

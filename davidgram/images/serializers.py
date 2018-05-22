@@ -44,10 +44,12 @@ class LikeSerializer(serializers.ModelSerializer):
     fields = '__all__'
 
 
+# TaggitSerializer을 추가!
 class ImageSerializer(TaggitSerializer, serializers.ModelSerializer):
 
   comments = CommentSerializer(many=True)
   creator = FeedUsersSerializer()
+  # Tags를 위한 Field 따로 생성!
   tags = TagListSerializerField()
 
   class Meta:

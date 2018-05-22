@@ -104,6 +104,8 @@ MIGRATION_MODULES = {
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
+    # 이부분이 원래는 사이트에서 cookie값을 받아서 user authenticate 하는 작업이다.
+    # 우리는 리액트를 쓸건데 리액트는 cookie가 아니라 JWT를 가지고 놈! 그래서 JWT 작업을 해줘야한다.
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = 'users.User'
@@ -259,18 +261,33 @@ SOCIALACCOUNT_ADAPTER = 'davidgram.users.adapters.SocialAccountAdapter'
 # 태그 upper/lowercase 구분 없이 하는 부분.
 TAGGIT_CASE_INTENSIVE = True
 
+
+# 우리는 리액트를 쓸건데 리액트는 cookie가 아니라 JWT를 가지고 놈! 그래서 JWT 작업을 해줘야한다.
+# JWT는 JSON format으로 되어있다.
+# pipenv install djangorestframework-jwt
+# 작동 원리
+#   1. Browser에서 POST / GET 등 여러 request를 보낸다.
+#   2. 서버에서 JWT를 생성해서 Browser에게 다시 넘겨준다.
+#   3. Browser는 JWT를 Header에 넣어서 다시 서버로 넘긴다.
+#   4. JWT signature을 확인하고 user authentication에 따라 Response 작업을 진행한다.
+# http://getblimp.github.io/django-rest-framework-jwt/
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 이부분은 Front / App을 위해서 남겨놓은것!
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # 아래 두개는 Admin을 위한 거다.
         # 'rest_framework.authentication.SessionAuthentication',
         # 'rest_framework.authentication.BasicAuthentication',
     ),
 }
 
 REST_USE_JWT = True
+# 이부분이 해주는 역할은 GET 메소드로 로그아웃을 할 수 있게 해준다.(버튼만 눌러도 로그아웃이 되게 만드는 작업)
+# 원래는 GET으로 데이터의 shape을 바꾸면 안되지만 편의상 이렇게 함!
 ACCOUNT_LOGOUT_ON_GET = True
 
 SOCIALACCOUNT_QUERY_EMAIL = True
