@@ -255,6 +255,8 @@ SOCIALACCOUNT_ADAPTER = 'davidgram.users.adapters.SocialAccountAdapter'
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+# 태그 upper/lowercase 구분 없이 하는 부분.
 TAGGIT_CASE_INTENSIVE = True
 
 REST_FRAMEWORK = {
@@ -274,3 +276,7 @@ ACCOUNT_LOGOUT_ON_GET = True
 SOCIALACCOUNT_QUERY_EMAIL = True
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+JWT_AUTH = {
+    'JWT_VERIFY_EXPIRATION': False
+}

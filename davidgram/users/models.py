@@ -17,6 +17,8 @@ class User(AbstractUser):
 
     # First Name and Last Name do not cover name patterns
     # around the globe.
+    # 추후에 추가한 field에 대해서는 기존의 유저들이 field를 가지고 있지 않으므로 null=True를 준다.
+    # blank=True는 자명하게 굳이 넣지 않아도 되는 Field를 의미.
     profile_image = models.ImageField(null=True, blank=True)
     name = models.CharField(_("Name of User"), blank=True, max_length=255)
     website = models.URLField(null=True)

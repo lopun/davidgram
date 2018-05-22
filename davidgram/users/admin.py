@@ -4,6 +4,7 @@ from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from .models import User
 
+''' Cookie Cutter에서 제공 '''
 
 class MyUserChangeForm(UserChangeForm):
 

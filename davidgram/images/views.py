@@ -167,7 +167,8 @@ class Search(APIView):
       hashtags = hashtags.split(",")
 
       images = models.Image.objects.filter(tags__name__in=hashtags).distinct()
-      #distinct는 두번이상 해쉬태그에 걸리지 않기 위해서 넣는거다.
+      # distinct는 두번이상 해쉬태그에 걸리지 않기 위해서 넣는거다.
+      # tags__name__in은 nested 구조를 탐색하기 위한 거다. tags중 name이 hashtags를 가지고 있는지?를 봄.
 
       serializer = serializers.CountImageSerializer(images, many=True)
 

@@ -20,6 +20,7 @@ class ImageAdmin(admin.ModelAdmin):
     'creator',
   )
 
+  #list_display에서는 admin 패널에서 보여주고 싶은 내용들을 넣는다.
   list_display = (
     'file',
     'location',
@@ -27,8 +28,7 @@ class ImageAdmin(admin.ModelAdmin):
     'creator',
     'created_at',
     'updated_at',
-  ) # 기본적으로는 models의 __str__을 return하지만 list_display를 입력해줌으로써
-    # 이 order으로 정렬하여 보여준다. Super cool!
+  )
 
 
 @admin.register(models.Like)
