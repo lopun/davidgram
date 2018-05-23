@@ -35,8 +35,10 @@ class Container extends Component {
   };
 
   _handleSubmit = e => {
+    const { usernameLogin } = this.props;
+    const { username, password } = this.state;
     e.preventDefault();
-    // redux action
+    usernameLogin(username, password);
   };
 
   _handleFacebookLogin = response => {

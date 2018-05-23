@@ -294,6 +294,42 @@ SOCIALACCOUNT_QUERY_EMAIL = True
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+# JWT 토큰이 expire되지 않도록 만든다.
 JWT_AUTH = {
     'JWT_VERIFY_EXPIRATION': False
+}
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'SCOPE': [
+            'email',
+            'public_profile',
+            'user_friends'
+        ],
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time',
+            'picture'
+        ],
+        'AUTH_PARAMS': {
+            #'auth_type': 'reauthenticate'
+        },
+        'METHOD': 'oauth2',
+        #'LOCALE_FUNC': 'path.to.callable',
+        'VERIFIED_EMAIL': True,
+        'VERSION': 'v2.4'
+    }
+}
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'davidgram.users.serializers.SignUpSerializer'
 }

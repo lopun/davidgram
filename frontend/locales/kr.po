@@ -28,7 +28,7 @@ msgstr "회원가입"
 
 #: src/components/Footer/index.js
 msgid "About Us"
-msgstr ""
+msgstr "관하여"
 
 #: src/components/Footer/index.js
 msgid "Support"
@@ -60,9 +60,40 @@ msgstr "약관"
 
 #: src/components/Footer/index.js
 msgid "Directory"
-msgstr ""
+msgstr "디렉토리"
 
 #: src/components/Footer/index.js
 msgid "Language"
 msgstr "언어"
+
+#: src/components/LoginForm/presenter.js
+#: src/components/SignupForm/presenter.js
+msgid "Username"
+msgstr "아이디"
+
+#: src/components/LoginForm/presenter.js
+#: src/components/SignupForm/presenter.js
+msgid "Password"
+msgstr "비밀번호"
+
+#: src/components/LoginForm/presenter.js
+#: src/components/SignupForm/presenter.js
+msgid "Log in with Facebook"
+msgstr ""
+
+#: src/components/LoginForm/presenter.js
+msgid "Forgot Password?"
+msgstr "비밀번호를 잊으셨습니까?"
+
+#: src/components/SignupForm/presenter.js
+msgid "Email"
+msgstr "이메일"
+
+#: src/components/SignupForm/presenter.js
+msgid "Full Name"
+msgstr "이름"
+
+#: src/components/SignupForm/presenter.js
+msgid "Sign up"
+msgstr "회원가입"
 

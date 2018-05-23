@@ -34,15 +34,57 @@ function facebookLogin(access_token) {
     })
       .then(response => response.json())
       .then(json => {
-        // 단순히 console.log(json)을 하는게 아니라 localStorage에 받은 json에서 token을 저장을 한다.
-        // 그리고 saveToken에 json.token을 담아서 dispatch를 함으로써 src/components/App/presenter.js에서 isLoggedIn: true를 인식하고
-        // Feed 페이지로 rerouting을 해준다.
         if (json.token) {
-          localStorage.setItem("jwt", json.token);
           dispatch(saveToken(json.token));
         }
       })
       .catch(err => console.log(err));
+  };
+}
+
+function usernameLogin(username, password) {
+  return function(dispatch) {
+    fetch("/rest-auth/login/", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username,
+        password
+      })
+    })
+      .then(response => response.json())
+      .then(json => {
+        if (json.token) {
+          dispatch(saveToken(json.token));
+        }
+      })
+      .catch(err => console.log(err));
+  };
+}
+
+function createAccount(username, password, email, name) {
+  return function(dispatch) {
+    fetch("/rest-auth/registration/", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username,
+        password1: password,
+        password2: password,
+        email,
+        name
+      })
+    })
+      .then(response => response.json())
+      .then(json => {
+        if (json.token) {
+          dispatch(saveToken(json.token));
+        }
+      });
   };
 }
 
@@ -53,7 +95,9 @@ const initialState = {
 };
 
 const actionCreators = {
-  facebookLogin
+  facebookLogin,
+  usernameLogin,
+  createAccount
 };
 
 export { actionCreators };
@@ -74,6 +118,8 @@ function reducer(state = initialState, action) {
 
 function applySetToken(state, action) {
   const { token } = action;
+  // token은 saveToken에서 json.token을 받아서 localStorage에 저장해준다.
+  localStorage.setItem("jwt", token);
   return {
     ...state,
     isLoggedIn: true,
