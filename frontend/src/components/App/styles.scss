@@ -7,6 +7,11 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: $normal-font-size;
 }
+
+// 편의를 위해서 border-box 처리함!
+* {
+  box-sizing: border-box;
+}
 img {
   max-width: 100%;
 }
