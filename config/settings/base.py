@@ -297,6 +297,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 # JWT 토큰이 expire되지 않도록 만든다.
 JWT_AUTH = {
     'JWT_VERIFY_EXPIRATION': False
+    # http://getblimp.github.io/django-rest-framework-jwt/
 }
 
 SOCIALACCOUNT_PROVIDERS = {

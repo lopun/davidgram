@@ -3,6 +3,8 @@
 // actions
 
 const SAVE_TOKEN = "SAVE_TOKEN";
+const LOGOUT = "LOGOUT";
+// const RESET = "RESET";
 
 // action creators
 
@@ -13,6 +15,19 @@ function saveToken(token) {
     token
   };
 }
+
+function logout() {
+  return {
+    type: LOGOUT
+  };
+}
+
+// function reset(email) {
+//   return {
+//     type: RESET,
+//     email
+//   };
+// }
 
 // API action
 
@@ -88,19 +103,37 @@ function createAccount(username, password, email, name) {
   };
 }
 
+// function resetPassword(email) {
+//   return function(dispatch) {
+//     fetch("/rest-auth/password/reset/", {
+//       method: "post",
+//       headers: {
+//         "Content-Type": "application/json"
+//       },
+//       body: JSON.stringify({
+//         email
+//       })
+//     })
+//       .then(response => response.json())
+//       .then(json => console.log(json))
+//       .catch(err => console.log(err));
+//   };
+// }
+
 // Initial State
 const initialState = {
   // isLoggedIn: localStorage.getItem("jwt") || false 이부분이 실행되면 App의 presenter에서 proptypes가 bool인지 체크하는데 여기서 에러가 뜸!
-  isLoggedIn: localStorage.getItem("jwt") ? true : false
+  isLoggedIn: localStorage.getItem("jwt") ? true : false,
+  token: localStorage.getItem("jwt")
 };
 
 const actionCreators = {
   facebookLogin,
   usernameLogin,
-  createAccount
+  createAccount,
+  // resetPassword,
+  logout
 };
-
-export { actionCreators };
 
 // reducer
 
@@ -109,6 +142,8 @@ function reducer(state = initialState, action) {
     case SAVE_TOKEN:
       return applySetToken(state, action);
     // saveToken이 dispatch되면 applySetToken이 실행됨으로써 isLoggedin : true => Feedpage로 rerouting!
+    case LOGOUT:
+      return applyLogout(state, action);
     default:
       return state;
   }
@@ -126,6 +161,17 @@ function applySetToken(state, action) {
     token
   };
 }
+
+function applyLogout(state, action) {
+  localStorage.removeItem("jwt");
+  return {
+    isLoggedin: false
+  };
+}
+
+// export
+
+export { actionCreators };
 
 // export reducer by default
 

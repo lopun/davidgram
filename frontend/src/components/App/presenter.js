@@ -5,6 +5,8 @@ import "./styles.scss";
 import Footer from "components/Footer";
 import Auth from "components/Auth";
 import Navigation from "components/Navigation/presenter";
+import Feed from "components/Feed";
+import ResetForm from "components/ResetForm";
 
 const App = props => [
   // Nav bar
@@ -21,7 +23,7 @@ App.propTypess = {
 
 const PrivateRoutes = props => (
   <Switch>
-    <Route exact path="/" render={() => "Feed"} />
+    <Route exact path="/" component={Feed} />
     <Route path="/explore" render={() => "Explore"} />
   </Switch>
 );
@@ -29,7 +31,7 @@ const PrivateRoutes = props => (
 const PublicRoutes = props => (
   <Switch>
     <Route exact path="/" component={Auth} />
-    <Route path="/forgot" render={() => "password"} />
+    <Route path="/forgot" component={ResetForm} />
   </Switch>
 );
 

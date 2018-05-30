@@ -11,17 +11,23 @@ urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, admin.site.urls),
     # User management
+    url(r'^', include('django.contrib.auth.urls')),
     url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     url(r"^users/", include("davidgram.users.urls", namespace="users")),
     url(r"^images/", include("davidgram.images.urls", namespace="images")),
     url(r'^notifications/', include('davidgram.notifications.urls', namespace='notifications')),
     url(r"^accounts/", include("allauth.urls")),
-    url(r"^", views.ReactAppView.as_view()),
+    # url(r"^", views.ReactAppView.as_view()), 아래로 옮김!! 겁나 헤맸네
     # Your stuff: custom urls includes go here
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
+
+# urlpatterns를 아래로 옮기지 않으면 media 파일들을 불러올 때 못불러오는 불상사가 생길 수 있음.
+urlpatterns += [
+    url(r"^", views.ReactAppView.as_view()),
+]
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit

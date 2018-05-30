@@ -3,6 +3,7 @@ import React from "react";
 import formStyles from "shared/formStyles.scss";
 import FacebookLogin from "react-facebook-login";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const LoginForm = (props, context) => (
   <div className={formStyles.formComponent}>
@@ -37,9 +38,11 @@ const LoginForm = (props, context) => (
         textButton={context.t("Log in with Facebook")}
       />
     </span>
-    <span className={formStyles.forgotLink}>
-      {context.t("Forgot Password?")}
-    </span>
+    <Link to="/forgot">
+      <span className={formStyles.forgotLink}>
+        {context.t("Forgot Password?")}
+      </span>
+    </Link>
   </div>
 );
 
