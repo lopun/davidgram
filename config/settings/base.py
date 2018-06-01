@@ -89,7 +89,7 @@ LOCAL_APPS = [
     'davidgram.notifications.apps.NotificationsConfig' #notifications app
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = LOCAL_APPS + THIRD_PARTY_APPS + DJANGO_APPS
 
 # MIGRATIONS
 # ------------------------------------------------------------------------------
@@ -226,8 +226,8 @@ FIXTURE_DIRS = (
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
-
+# EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # ADMIN
 # ------------------------------------------------------------------------------
 # Django Admin URL regex.
@@ -246,7 +246,7 @@ ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
@@ -280,8 +280,8 @@ REST_FRAMEWORK = {
         # 이부분은 Front / App을 위해서 남겨놓은것!
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         # 아래 두개는 Admin을 위한 거다.
-        # 'rest_framework.authentication.SessionAuthentication',
-        # 'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
     ),
 }
 
@@ -331,6 +331,11 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+REST_AUTH_SERIALIZERS = {
+    'PASSWORD_RESET_SERIALIZER': 'davidgram.users.serializers.PasswordSerializer',
+}
+
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'davidgram.users.serializers.SignUpSerializer'
 }
+

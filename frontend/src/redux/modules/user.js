@@ -4,7 +4,9 @@
 
 const SAVE_TOKEN = "SAVE_TOKEN";
 const LOGOUT = "LOGOUT";
-// const RESET = "RESET";
+const SET_USER_LIST = "SET_USER_LIST";
+const FOLLOW_USER = "FOLLOW_USER";
+const UNFOLLOW_USER = "UNFOLLOW_USER";
 
 // action creators
 
@@ -22,12 +24,26 @@ function logout() {
   };
 }
 
-// function reset(email) {
-//   return {
-//     type: RESET,
-//     email
-//   };
-// }
+function setUserList(userList) {
+  return {
+    type: SET_USER_LIST,
+    userList
+  };
+}
+
+function setfollowUser(userId) {
+  return {
+    type: FOLLOW_USER,
+    userId
+  };
+}
+
+function setunfollowUser(userId) {
+  return {
+    type: UNFOLLOW_USER,
+    userId
+  };
+}
 
 // API action
 
@@ -60,7 +76,7 @@ function facebookLogin(access_token) {
 function usernameLogin(username, password) {
   return function(dispatch) {
     fetch("/rest-auth/login/", {
-      method: "post",
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
@@ -82,7 +98,7 @@ function usernameLogin(username, password) {
 function createAccount(username, password, email, name) {
   return function(dispatch) {
     fetch("/rest-auth/registration/", {
-      method: "post",
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
@@ -103,22 +119,93 @@ function createAccount(username, password, email, name) {
   };
 }
 
-// function resetPassword(email) {
-//   return function(dispatch) {
-//     fetch("/rest-auth/password/reset/", {
-//       method: "post",
-//       headers: {
-//         "Content-Type": "application/json"
-//       },
-//       body: JSON.stringify({
-//         email
-//       })
-//     })
-//       .then(response => response.json())
-//       .then(json => console.log(json))
-//       .catch(err => console.log(err));
-//   };
-// }
+function getPhotoLikes(photoId) {
+  return (dispatch, getState) => {
+    const {
+      user: { token }
+    } = getState();
+    fetch(`/images/${photoId}/likes/`, {
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+      .then(response => {
+        if (response.status === 401) {
+          dispatch(logout());
+        }
+        return response.json();
+      })
+      .then(json => {
+        dispatch(setUserList(json));
+      });
+  };
+}
+
+function followUser(userId) {
+  return (dispatch, getState) => {
+    dispatch(setfollowUser(userId));
+    const {
+      user: { token }
+    } = getState();
+    fetch(`/users/${userId}/follow/`, {
+      method: "POST",
+      headers: {
+        Authorization: `JWT ${token}`,
+        "Content-Type": "application/json"
+      }
+    }).then(response => {
+      if (response.status === 401) {
+        dispatch(logout());
+      } else if (!response.ok) {
+        dispatch(setunfollowUser(userId));
+      }
+    });
+  };
+}
+
+function unfollowUser(userId) {
+  return (dispatch, getState) => {
+    dispatch(setunfollowUser(userId));
+    const {
+      user: { token }
+    } = getState();
+    fetch(`/users/${userId}/unfollow/`, {
+      method: "POST",
+      headers: {
+        Authorization: `JWT ${token}`,
+        "Content-Type": "application/json"
+      }
+    }).then(response => {
+      if (response.status === 401) {
+        dispatch(logout());
+      } else if (!response.ok) {
+        dispatch(setfollowUser(userId));
+      }
+    });
+  };
+}
+
+function getExplore() {
+  return (dispatch, getState) => {
+    const {
+      user: { token }
+    } = getState();
+    fetch(`/users/explore/`, {
+      method: "GET",
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+      .then(response => {
+        if (response.status === 401) {
+          dispatch(logout());
+        }
+        console.log(response);
+        return response.json();
+      })
+      .then(json => dispatch(setUserList(json)));
+  };
+}
 
 // Initial State
 const initialState = {
@@ -131,8 +218,11 @@ const actionCreators = {
   facebookLogin,
   usernameLogin,
   createAccount,
-  // resetPassword,
-  logout
+  logout,
+  getPhotoLikes,
+  followUser,
+  unfollowUser,
+  getExplore
 };
 
 // reducer
@@ -144,6 +234,12 @@ function reducer(state = initialState, action) {
     // saveToken이 dispatch되면 applySetToken이 실행됨으로써 isLoggedin : true => Feedpage로 rerouting!
     case LOGOUT:
       return applyLogout(state, action);
+    case SET_USER_LIST:
+      return applySetUserList(state, action);
+    case FOLLOW_USER:
+      return applyFollowUser(state, action);
+    case UNFOLLOW_USER:
+      return applyUnfollowUser(state, action);
     default:
       return state;
   }
@@ -167,6 +263,38 @@ function applyLogout(state, action) {
   return {
     isLoggedin: false
   };
+}
+
+function applySetUserList(state, action) {
+  const { userList } = action;
+  return {
+    ...state,
+    userList
+  };
+}
+
+function applyFollowUser(state, action) {
+  const { userId } = action;
+  const { userList } = state;
+  const updatedUserList = userList.map(user => {
+    if (user.id === userId) {
+      return { ...user, following: true };
+    }
+    return user;
+  });
+  return { ...state, userList: updatedUserList };
+}
+
+function applyUnfollowUser(state, action) {
+  const { userId } = action;
+  const { userList } = state;
+  const updatedUserList = userList.map(user => {
+    if (user.id === userId) {
+      return { ...user, following: false };
+    }
+    return user;
+  });
+  return { ...state, userList: updatedUserList };
 }
 
 // export

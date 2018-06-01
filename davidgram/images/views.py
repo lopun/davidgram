@@ -30,7 +30,9 @@ class Images(APIView):
 
     sorted_list = sorted(image_list, key=lambda image: image.created_at , reverse=True)
 
-    serializer = serializers.ImageSerializer(sorted_list, many=True)
+    # 이부분에 context를 넣어줌으로써 serializer에서 request에 접근을 할 수 있게됨.
+    # 그러면 유저가 이미지에 like를 했을 때 아이콘을 핑크색으로 바꿔주는 작업이 가능해진다.
+    serializer = serializers.ImageSerializer(sorted_list, many=True, context={'request': request})
 
     return Response(serializer.data)
 
@@ -60,7 +62,7 @@ class LikeImage(APIView):
 
     users = user_models.User.objects.filter(id__in=like_creators_ids)
 
-    serializer = user_serializers.ListUserSerializer(users, many=True)
+    serializer = user_serializers.ListUserSerializer(users, many=True, context={"request": request})
 
     return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -220,7 +222,7 @@ class ImageDetail(APIView):
     except models.Image.DoesNotExist:
       return Response(status=status.HTTP_404_NOT_FOUND)
 
-    serializer = serializers.ImageSerializer(image)
+    serializer = serializers.ImageSerializer(image, context={'request': request})
 
     return Response(data=serializer.data, status=status.HTTP_200_OK)
 

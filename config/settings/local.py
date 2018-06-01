@@ -32,11 +32,17 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG  # noqa F405
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
+# EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-host
-EMAIL_HOST = 'localhost'
+EMAIL_HOST = 'smtp.gmail.com' # default : 'localhost'
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-port
-EMAIL_PORT = 1025
+EMAIL_PORT = 587 # default : 1025
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ujin43255252@gmail.com'
+# EMAIL_HOST_PASSWORD = 'password from https://security.google.com/settings/security/apppasswords'
+EMAIL_HOST_PASSWORD = 'kjh5270!@#@!'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # django-debug-toolbar
 # ------------------------------------------------------------------------------

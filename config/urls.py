@@ -18,6 +18,7 @@ urlpatterns = [
     url(r"^images/", include("davidgram.images.urls", namespace="images")),
     url(r'^notifications/', include('davidgram.notifications.urls', namespace='notifications')),
     url(r"^accounts/", include("allauth.urls")),
+
     # url(r"^", views.ReactAppView.as_view()), 아래로 옮김!! 겁나 헤맸네
     # Your stuff: custom urls includes go here
 ] + static(

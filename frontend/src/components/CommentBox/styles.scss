@@ -1,0 +1,19 @@
+form {
+  width: 100%;
+  outline: none;
+  border: none;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  padding: 16px 0;
+  margin-top: 6px;
+  textarea {
+    border-style: none;
+    width: 100%;
+    height: 18px;
+    font-size: $big-font-size;
+    background-color: transparent;
+    resize: none;
+    &:focus {
+      outline: none;
+    }
+  }
+}

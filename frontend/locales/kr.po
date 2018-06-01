@@ -2,30 +2,6 @@ msgid ""
 msgstr ""
 "Language: kr"
 
-#: src/components/AuthForms/index.js
-msgid "Username"
-msgstr "유저 이름"
-
-#: src/components/AuthForms/index.js
-msgid "Password"
-msgstr "비밀번호"
-
-#: src/components/AuthForms/index.js
-msgid "Forgot Password?"
-msgstr "비밀번호를 잊으셨습니까?"
-
-#: src/components/AuthForms/index.js
-msgid "Email"
-msgstr "이메일"
-
-#: src/components/AuthForms/index.js
-msgid "Full Name"
-msgstr "전체 이름"
-
-#: src/components/AuthForms/index.js
-msgid "Sign up"
-msgstr "회원가입"
-
 #: src/components/Footer/index.js
 msgid "About Us"
 msgstr "관하여"
@@ -48,11 +24,11 @@ msgstr ""
 
 #: src/components/Footer/index.js
 msgid "Jobs"
-msgstr "직장"
+msgstr "구인"
 
 #: src/components/Footer/index.js
 msgid "Privacy"
-msgstr "보안"
+msgstr "개인정보"
 
 #: src/components/Footer/index.js
 msgid "Terms"
@@ -66,10 +42,14 @@ msgstr "디렉토리"
 msgid "Language"
 msgstr "언어"
 
+#: src/components/ForgotPassword/presenter.js
+msgid "We'll help you reset your password using your username or the email address associated with your account."
+msgstr "Davidagram 사용자 이름이나 계정에 연결된 이메일 주소를 사용해서 비밀번호를 재설정할 수 있도록 도와 드리겠습니다."
+
 #: src/components/LoginForm/presenter.js
 #: src/components/SignupForm/presenter.js
 msgid "Username"
-msgstr "아이디"
+msgstr "유저이름"
 
 #: src/components/LoginForm/presenter.js
 #: src/components/SignupForm/presenter.js
@@ -79,11 +59,21 @@ msgstr "비밀번호"
 #: src/components/LoginForm/presenter.js
 #: src/components/SignupForm/presenter.js
 msgid "Log in with Facebook"
-msgstr ""
+msgstr "페이스북으로 로그인"
 
 #: src/components/LoginForm/presenter.js
 msgid "Forgot Password?"
 msgstr "비밀번호를 잊으셨습니까?"
+
+#: src/components/Navigation/presenter.js
+#: src/components/ResetForm/presenter.js
+msgid "Logo"
+msgstr "로고"
+
+#: src/components/Navigation/presenter.js
+#: src/components/ResetForm/presenter.js
+msgid "Search"
+msgstr "찾기"
 
 #: src/components/SignupForm/presenter.js
 msgid "Email"
@@ -91,7 +81,7 @@ msgstr "이메일"
 
 #: src/components/SignupForm/presenter.js
 msgid "Full Name"
-msgstr "이름"
+msgstr "전체 이름"
 
 #: src/components/SignupForm/presenter.js
 msgid "Sign up"

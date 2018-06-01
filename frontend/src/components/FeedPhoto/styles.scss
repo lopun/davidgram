@@ -6,4 +6,31 @@
   &:last-child {
     margin-bottom: 0;
   }
+  header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    box-sizing: border-box;
+    height: 60px;
+    .profile-image {
+      width: 40px;
+      height: 40px;
+    }
+    .information-wrapper {
+      height: 36px;
+      justify-content: center;
+      margin-left: 12px;
+      display: flex;
+      flex-direction: column;
+      font-size: $normal-font-size;
+      font-weight: 400;
+      .username {
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+    }
+  }
+}
+.contents {
+  padding: 0 16px;
 }

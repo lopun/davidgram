@@ -51,6 +51,7 @@ class ImageSerializer(TaggitSerializer, serializers.ModelSerializer):
   creator = FeedUsersSerializer()
   # Tags를 위한 Field 따로 생성!
   tags = TagListSerializerField()
+  is_liked = serializers.SerializerMethodField()
 
   class Meta:
     model = models.Image
@@ -63,8 +64,23 @@ class ImageSerializer(TaggitSerializer, serializers.ModelSerializer):
       'like_count',
       'creator',
       'tags',
-      'created_at'
+      'natural_time',
+      # is_liked도 redux로 들어가서 Liked state를 조정해준다.
+      'is_liked',
     )
+
+  # SerializerMethodField 설명 읽어보기. get_+fieldname. obj는 model(image)를 의미함..
+  def get_is_liked(self, obj):
+    if 'request' in self.context:
+      request = self.context['request']
+      try:
+        models.Like.objects.get(
+          creator__id=request.user.id, image__id=obj.id)
+        return True # 하트 핑크색(Liked)
+      except models.Like.DoesNotExist:
+        return False # 하트 검은색(Not Liked)
+    return False
+
 
 class SmallImageSerializer(serializers.ModelSerializer):
 

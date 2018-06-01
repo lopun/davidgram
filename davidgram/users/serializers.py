@@ -4,6 +4,12 @@ from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 from . import models
 from davidgram.images import serializers as images_serializers
+from rest_auth.serializers import PasswordResetSerializer
+from allauth.account.forms import ResetPasswordForm
+
+# rest-auth와 allauth가 충돌하므로 이를 base.py에서 작업해줄거다.
+class PasswordSerializer(PasswordResetSerializer):
+    password_reset_form_class = ResetPasswordForm
 
 class UserProfileSerializer(serializers.ModelSerializer):
 
@@ -30,14 +36,28 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 class ListUserSerializer(serializers.ModelSerializer):
 
-  class Meta:
-    model = models.User
-    fields = (
-      'id',
-      'profile_image',
-      'username',
-      'name',
-    )
+    following = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.User
+        fields = (
+        'id',
+        'profile_image',
+        'username',
+        'name',
+        'following'
+        )
+
+    # obj = user model and request is from context in views.
+    # This part tells that we are following somebody or not!
+    def get_following(self, obj):
+        if 'request' in self.context:
+            request = self.context['request']
+            if obj in request.user.following.all():
+                return True
+        return False
+
+
 
 class SignUpSerializer(RegisterSerializer):
 

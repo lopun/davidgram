@@ -7,6 +7,7 @@ import Auth from "components/Auth";
 import Navigation from "components/Navigation/presenter";
 import Feed from "components/Feed";
 import ResetForm from "components/ResetForm";
+import Explore from "components/Explore";
 
 const App = props => [
   // Nav bar
@@ -24,7 +25,7 @@ App.propTypess = {
 const PrivateRoutes = props => (
   <Switch>
     <Route exact path="/" component={Feed} />
-    <Route path="/explore" render={() => "Explore"} />
+    <Route path="/explore" component={Explore} />
   </Switch>
 );
 

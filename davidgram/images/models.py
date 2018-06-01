@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from davidgram.users import models as user_models
 from taggit.managers import TaggableManager
+from django.contrib.humanize.templatetags.humanize import naturaltime
 # Create your models here.
 
 @python_2_unicode_compatible
@@ -42,6 +43,13 @@ class Image(TimeStampedModel):
 
   class Meta:
     ordering = ['-created_at']
+
+  # 피드에 뜨는 날짜가 못생겨서 natural_time property를 추가해줬다.(다시 말하지만 property는 DB에 보내지는 않지만
+  # 다른 모델 혹은 serializer에서 사용 가능하도록 해주는 장치임! serializer 들어가보면 created_at 대신에 natural_time을 썼다.)
+  @property
+  def natural_time(self):
+    return naturaltime(self.created_at)
+
 
 
 @python_2_unicode_compatible

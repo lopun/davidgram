@@ -1,0 +1,44 @@
+.container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .box {
+    @include boxBorder(no);
+    width: 100%;
+    max-width: $max-card-width;
+    .header {
+      height: 44px;
+      padding-top: 14px;
+      border-bottom: 2px solid rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      font-size: $big-font-size;
+      font-weight: 600;
+      .title {
+        order: 1;
+        margin-left: auto;
+        margin-right: auto;
+        padding-right: 20px;
+      }
+      svg {
+        padding-top: 4px;
+        margin-left: -8px;
+        cursor: pointer;
+      }
+    }
+    .content {
+      background-color: #FBFBFB;
+      // min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+}
