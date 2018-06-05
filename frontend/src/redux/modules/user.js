@@ -7,6 +7,8 @@ const LOGOUT = "LOGOUT";
 const SET_USER_LIST = "SET_USER_LIST";
 const FOLLOW_USER = "FOLLOW_USER";
 const UNFOLLOW_USER = "UNFOLLOW_USER";
+const SET_IMAGE_LIST = "SET_IMAGE_LIST";
+const SET_NOTIFICATIONS = "SET_NOTIFICATIONS";
 
 // action creators
 
@@ -42,6 +44,20 @@ function setunfollowUser(userId) {
   return {
     type: UNFOLLOW_USER,
     userId
+  };
+}
+
+function setImageList(imageList) {
+  return {
+    type: SET_IMAGE_LIST,
+    imageList
+  };
+}
+
+function setNotifications(notificationList) {
+  return {
+    type: SET_NOTIFICATIONS,
+    notificationList
   };
 }
 
@@ -207,6 +223,75 @@ function getExplore() {
   };
 }
 
+function searchByTerm(searchTerm) {
+  return async (dispatch, getState) => {
+    const {
+      user: { token }
+    } = getState();
+    const userList = await searchUsers(token, searchTerm);
+    const imageList = await searchImages(token, searchTerm);
+    if (userList === 401 || imageList === 401) {
+      dispatch(logout());
+    }
+    dispatch(setUserList(userList));
+    dispatch(setImageList(imageList));
+  };
+}
+
+function searchUsers(token, searchTerm) {
+  return fetch(`/users/search/?username=${searchTerm}`, {
+    headers: {
+      Authorization: `JWT ${token}`
+    }
+  })
+    .then(response => {
+      if (response.status === 401) {
+        return 401;
+      }
+      return response.json();
+    })
+    .then(json => json);
+}
+
+function searchImages(token, searchTerm) {
+  return fetch(`/images/search/?hashtags=${searchTerm}`, {
+    headers: {
+      Authorization: `JWT ${token}`
+    }
+  })
+    .then(response => {
+      if (response.status === 401) {
+        return 401;
+      }
+      return response.json();
+    })
+    .then(json => json);
+}
+
+function getNotifications() {
+  return (dispatch, getState) => {
+    const {
+      user: { token }
+    } = getState();
+    fetch("/notifications/", {
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+      .then(response => {
+        if (response.status === 401) {
+          dispatch(logout());
+        }
+        return response.json();
+      })
+      .then(json => {
+        console.log(json);
+        dispatch(setNotifications(json));
+      })
+      .catch(err => console.log(err));
+  };
+}
+
 // Initial State
 const initialState = {
   // isLoggedIn: localStorage.getItem("jwt") || false 이부분이 실행되면 App의 presenter에서 proptypes가 bool인지 체크하는데 여기서 에러가 뜸!
@@ -222,7 +307,9 @@ const actionCreators = {
   getPhotoLikes,
   followUser,
   unfollowUser,
-  getExplore
+  getExplore,
+  searchByTerm,
+  getNotifications
 };
 
 // reducer
@@ -240,12 +327,20 @@ function reducer(state = initialState, action) {
       return applyFollowUser(state, action);
     case UNFOLLOW_USER:
       return applyUnfollowUser(state, action);
+    case SET_IMAGE_LIST:
+      return applySetImageList(state, action);
+    case SET_NOTIFICATIONS:
+      return applySetNotifications(state, action);
     default:
       return state;
   }
 }
 
 // reducer functions
+
+function applyFollowSingleUser(state, action) {
+  const { userId } = action;
+}
 
 function applySetToken(state, action) {
   const { token } = action;
@@ -295,6 +390,22 @@ function applyUnfollowUser(state, action) {
     return user;
   });
   return { ...state, userList: updatedUserList };
+}
+
+function applySetImageList(state, action) {
+  const { imageList } = action;
+  return {
+    ...state,
+    imageList
+  };
+}
+
+function applySetNotifications(state, action) {
+  const { notificationList } = action;
+  return {
+    ...state,
+    notificationList
+  };
 }
 
 // export

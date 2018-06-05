@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Ionicon from "react-ionicons";
 import { Link } from "react-router-dom";
 import styles from "./styles.scss";
+import Notification from "components/Notification";
 
 const Navigation = (props, context) => {
   return (
@@ -18,7 +19,7 @@ const Navigation = (props, context) => {
           </Link>
         </div>
         <div className={styles.column}>
-          <form onSubmit={props.onSubmit}>
+          <form onSubmit={props.onSubmit} method="post">
             <input
               type="text"
               placeholder={context.t("Search")}
@@ -29,7 +30,7 @@ const Navigation = (props, context) => {
           </form>
         </div>
         <div className={styles.column}>
-          <div className={styles.navIcon}>
+          <div className={styles.navIconWrapper}>
             <Link to="/explore">
               <Ionicon
                 icon="ios-compass-outline"
@@ -38,10 +39,17 @@ const Navigation = (props, context) => {
               />
             </Link>
           </div>
-          <div className={styles.navIcon}>
-            <Ionicon icon="ios-heart-outline" fontSize="28px" color="black" />
+          <div className={styles.navIconWrapper}>
+            <Ionicon
+              icon="ios-heart-outline"
+              fontSize="28px"
+              color="black"
+              onClick={props.handleNotification}
+              className={styles.navIcon}
+            />
+            {props.notification ? <Notification /> : null}
           </div>
-          <div className={styles.navIcon}>
+          <div className={styles.navIconWrapper}>
             <Link to="/profile">
               <Ionicon
                 icon="ios-person-outline"
@@ -63,7 +71,9 @@ Navigation.contextTypes = {
 Navigation.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired
+  value: PropTypes.string.isRequired,
+  handleNotification: PropTypes.func.isRequired,
+  notification: PropTypes.bool.isRequired
 };
 
 export default Navigation;

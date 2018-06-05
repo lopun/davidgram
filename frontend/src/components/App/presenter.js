@@ -4,10 +4,11 @@ import { Route, Switch } from "react-router-dom";
 import "./styles.scss";
 import Footer from "components/Footer";
 import Auth from "components/Auth";
-import Navigation from "components/Navigation/presenter";
+import Navigation from "components/Navigation";
 import Feed from "components/Feed";
 import ResetForm from "components/ResetForm";
 import Explore from "components/Explore";
+import Search from "components/Search";
 
 const App = props => [
   // Nav bar
@@ -26,6 +27,7 @@ const PrivateRoutes = props => (
   <Switch>
     <Route exact path="/" component={Feed} />
     <Route path="/explore" component={Explore} />
+    <Route path="/search/:searchTerm" component={Search} />
   </Switch>
 );
 

@@ -1,0 +1,43 @@
+.notification-wrapper {
+  @include boxBorder(no);
+  width: 481px;
+  max-height: 350px;
+  min-height: 150px;
+  overflow-y: scroll;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  transform: translate(-430px, 5px);
+  border: 0px solid transparent;
+  box-shadow: 0px 0px rgba(0,0,0,0.5);
+  background-color: white;
+  box-shadow: 0px 0px 3px #b2b2b2;
+  z-index: 1;
+  font-size: $normal-font-size;
+  font-weight: 400;
+  color: $font-black;
+}
+.loading {
+  width: 100%;
+  min-height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.triangle {
+  position:absolute;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 10px solid white;
+  margin-top:-4px;
+  transform: translate(2px, 0);
+  z-index:3;
+}
+.border {
+  margin-top: -5px;
+  border-bottom: 10px solid #e0e0e0;
+  z-index: 2;
+}

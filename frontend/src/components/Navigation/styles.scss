@@ -4,6 +4,8 @@
   display: flex;
   justify-content: center;
   margin-bottom: 60px;
+  position: fixed;
+  top: 0;
   .inner {
     max-width: $max-page-width;
     display: flex;
@@ -43,8 +45,10 @@
           background-color: white;
         }
       }
-      .nav-icon {
+      .nav-icon-wrapper {
         margin-left: 30px;
+      }
+      .nav-icon{
         cursor: pointer;
       }
     }
