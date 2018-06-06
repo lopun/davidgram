@@ -60,7 +60,7 @@ FeedPhoto.propTypes = {
   creator: PropTypes.shape({
     profile_image: PropTypes.string,
     usersname: PropTypes.string.isRequired
-  }).isRequired,
+  }),
   location: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   like_count: PropTypes.number.isRequired,
@@ -73,7 +73,7 @@ FeedPhoto.propTypes = {
         usersname: PropTypes.string.isRequired
       }).isRequired
     })
-  ).isRequired,
+  ),
   natural_time: PropTypes.string.isRequired,
   is_liked: PropTypes.bool.isRequired,
   seeingLikes: PropTypes.bool.isRequired,

@@ -9,6 +9,7 @@ const FOLLOW_USER = "FOLLOW_USER";
 const UNFOLLOW_USER = "UNFOLLOW_USER";
 const SET_IMAGE_LIST = "SET_IMAGE_LIST";
 const SET_NOTIFICATIONS = "SET_NOTIFICATIONS";
+const SET_USERNAME = "SET_USERNAME";
 
 // action creators
 
@@ -61,6 +62,13 @@ function setNotifications(notificationList) {
   };
 }
 
+function setUsername(username) {
+  return {
+    type: SET_USERNAME,
+    username
+  };
+}
+
 // API action
 
 // proxy part에서 localhost:8000을 작업해놨기 때문에
@@ -105,6 +113,7 @@ function usernameLogin(username, password) {
       .then(json => {
         if (json.token) {
           dispatch(saveToken(json.token));
+          dispatch(setUsername(username));
         }
       })
       .catch(err => console.log(err));
@@ -292,6 +301,15 @@ function getNotifications() {
   };
 }
 
+function getProfile() {
+  return (dispatch, getState) => {
+    const {
+      user: { token }
+    } = getState();
+    fetch("/users/${}");
+  };
+}
+
 // Initial State
 const initialState = {
   // isLoggedIn: localStorage.getItem("jwt") || false 이부분이 실행되면 App의 presenter에서 proptypes가 bool인지 체크하는데 여기서 에러가 뜸!
@@ -331,6 +349,8 @@ function reducer(state = initialState, action) {
       return applySetImageList(state, action);
     case SET_NOTIFICATIONS:
       return applySetNotifications(state, action);
+    case SET_USERNAME:
+      return applySetUsername(state, action);
     default:
       return state;
   }
@@ -401,6 +421,15 @@ function applySetNotifications(state, action) {
   return {
     ...state,
     notificationList
+  };
+}
+
+function applySetUsername(state, action) {
+  const { username } = action;
+  localStorage.setItem("username", username);
+  return {
+    ...state,
+    username
   };
 }
 

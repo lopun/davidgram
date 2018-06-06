@@ -37,7 +37,7 @@ $iphone6plus-width: 550px;
   }
 }
 @mixin boxBorder($radius) {
-  border: 1px solid #e6e6e6;
+  border: 1px solid #dbdbdb;
   background-color: white;
   @if $radius == yes {
     border-radius: 3px;
