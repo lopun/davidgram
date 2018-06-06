@@ -15,7 +15,9 @@ const Profile = (props, context) => {
             <div className={styles.profileImageWrapper}>
               <img
                 className={styles.profileImage}
-                src={loggedInUser.profile_image}
+                src={
+                  loggedInUser.profile_image || require("images/noPhoto.jpg")
+                }
                 alt="cool_image"
               />
             </div>
