@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   const {
     notification: {
-      creator: { following, id }
+      creator: { id }
     }
   } = ownProps;
   return {

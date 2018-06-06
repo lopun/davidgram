@@ -17,6 +17,7 @@
   .paragraph {
     color: #262626;
     display: block;
+    display: -webkit-box;
     flex: 1 0 0%;
     line-height: 1.3;
     margin: 0 12px;
@@ -24,6 +25,23 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+  }
+  .two-line {
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    max-width: 320px;
+    height: $normal-font-size*$line-height*$lines-notification;
+    margin: 0 12px;
+    font-size: $normal-font-size;
+    line-height: $line-height;
+    -webkit-line-clamp: $lines-notification;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .natural-time {
+    font-size: $normal-font-size;
+    color: rgba(0,0,0,0.54);
   }
   .image {
     width: auto;

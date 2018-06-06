@@ -28,6 +28,8 @@ class Images(APIView):
 
       image_list.append(image)
 
+    image_list = list(set(image_list))
+
     sorted_list = sorted(image_list, key=lambda image: image.created_at , reverse=True)
 
     # 이부분에 context를 넣어줌으로써 serializer에서 request에 접근을 할 수 있게됨.

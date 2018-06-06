@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./styles.scss";
 import Loading from "components/Loading";
-import UserListRow from "components/UserListRow";
 import UserListColumn from "components/UserListColumn";
 import PhotoDisplay from "components/PhotoDisplay";
 

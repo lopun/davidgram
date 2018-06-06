@@ -8,6 +8,9 @@ class NotificationSerializer(serializers.ModelSerializer):
   creator = user_serializers.ListUserSerializer()
   image = image_serializers.SmallImageSerializer()
 
+
   class Meta:
     model = models.Notification
-    fields = '__all__'
+    fields = (
+      'creator', 'to', 'notification_type', 'image', 'comment', 'natural_time', 'id', 'updated_at', 'created_at'
+    )

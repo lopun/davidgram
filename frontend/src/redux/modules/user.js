@@ -338,10 +338,6 @@ function reducer(state = initialState, action) {
 
 // reducer functions
 
-function applyFollowSingleUser(state, action) {
-  const { userId } = action;
-}
-
 function applySetToken(state, action) {
   const { token } = action;
   // token은 saveToken에서 json.token을 받아서 localStorage에 저장해준다.

@@ -11,7 +11,6 @@ const Notification = (props, context) => {
         className={styles.notificationWrapper}
         onClick={props.getNotifications}
       >
-        {/* {props.notificationList && props.notificationList.map(notification => )} */}
         {props.notificationList ? (
           props.notificationList.map(notification => (
             <NotificationDisplay

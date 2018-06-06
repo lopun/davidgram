@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from davidgram.users import models as user_models
 from davidgram.images import models as image_models
+from django.contrib.humanize.templatetags.humanize import naturaltime
 
 class Notification(image_models.TimeStampedModel):
 
@@ -22,3 +23,7 @@ class Notification(image_models.TimeStampedModel):
 
   def __str__(self):
     return 'From: {} - To: {}'.format(self.creator, self.to)
+
+  @property
+  def natural_time(self):
+    return naturaltime(self.created_at)

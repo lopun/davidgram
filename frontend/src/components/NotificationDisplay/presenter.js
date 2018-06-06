@@ -17,12 +17,15 @@ const NotificationDisplay = (props, context) => {
             }
             alt="profile_image"
           />
-          <div className={styles.paragraph}>
+          <p className={styles.twoLine}>
             <span className={styles.username}>
               {notification.creator.username}{" "}
             </span>
-            {context.t("commented on your picture.")} {notification.comment}
-          </div>
+            {context.t("commented on your picture. ")} {notification.comment}
+            <span className={styles.naturalTime}>
+              {notification.natural_time}
+            </span>
+          </p>
           <div>
             <img
               className={styles.image}
@@ -46,12 +49,15 @@ const NotificationDisplay = (props, context) => {
               alt="profile_image"
             />
           </div>
-          <div className={styles.paragraph}>
+          <p className={styles.paragraph}>
             <span className={styles.username}>
               {notification.creator.username}
             </span>{" "}
-            {context.t("likes your picture.")}
-          </div>
+            {context.t("likes your picture. ")}
+            <span className={styles.naturalTime}>
+              {notification.natural_time}
+            </span>
+          </p>
           <div>
             <img
               className={styles.image}
@@ -75,12 +81,15 @@ const NotificationDisplay = (props, context) => {
               alt="profile_image"
             />
           </div>
-          <div className={styles.paragraph}>
+          <p className={styles.paragraph}>
             <span className={styles.username}>
               {notification.creator.username}{" "}
             </span>
-            {context.t("just followed your account.")}
-          </div>
+            {context.t("just followed your account. ")}
+            <span className={styles.naturalTime}>
+              {notification.natural_time}
+            </span>
+          </p>
           <div className={styles.follow} onClick={handleClick}>
             {props.following ? context.t("Unfollow") : context.t("Follow")}
           </div>
