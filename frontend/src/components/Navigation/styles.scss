@@ -6,6 +6,7 @@
   margin-bottom: 60px;
   position: fixed;
   top: 0;
+  z-index: 10;
   .inner {
     max-width: $max-page-width;
     display: flex;

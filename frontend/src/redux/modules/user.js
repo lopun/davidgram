@@ -10,6 +10,7 @@ const UNFOLLOW_USER = "UNFOLLOW_USER";
 const SET_IMAGE_LIST = "SET_IMAGE_LIST";
 const SET_NOTIFICATIONS = "SET_NOTIFICATIONS";
 const SET_USERNAME = "SET_USERNAME";
+const SET_PROFILE = "SET_PROFILE";
 
 // action creators
 
@@ -66,6 +67,13 @@ function setUsername(username) {
   return {
     type: SET_USERNAME,
     username
+  };
+}
+
+function setProfile(loggedInUser) {
+  return {
+    type: SET_PROFILE,
+    loggedInUser
   };
 }
 
@@ -306,7 +314,23 @@ function getProfile() {
     const {
       user: { token }
     } = getState();
-    fetch("/users/${}");
+    const username = localStorage.getItem("username");
+    fetch(`/users/${username}/`, {
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+      .then(response => {
+        if (response.status === 401) {
+          dispatch(logout());
+        }
+        return response.json();
+      })
+      .then(json => {
+        console.log(json);
+        dispatch(setProfile(json));
+      })
+      .catch(err => console.log(err));
   };
 }
 
@@ -327,7 +351,8 @@ const actionCreators = {
   unfollowUser,
   getExplore,
   searchByTerm,
-  getNotifications
+  getNotifications,
+  getProfile
 };
 
 // reducer
@@ -351,6 +376,8 @@ function reducer(state = initialState, action) {
       return applySetNotifications(state, action);
     case SET_USERNAME:
       return applySetUsername(state, action);
+    case SET_PROFILE:
+      return applySetProfile(state, action);
     default:
       return state;
   }
@@ -430,6 +457,14 @@ function applySetUsername(state, action) {
   return {
     ...state,
     username
+  };
+}
+
+function applySetProfile(state, action) {
+  const { loggedInUser } = action;
+  return {
+    ...state,
+    loggedInUser
   };
 }
 

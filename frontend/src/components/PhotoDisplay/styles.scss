@@ -5,8 +5,12 @@
   overflow: hidden;
   position: relative;
   .photo {
-    min-height: 100%;
-    max-width: 100%;
+    // min-height: 100%;
+    // max-width: 100%;
+    top: 0;
+    left: 0;
+    height: auto;
+    width: 100%;
   }
   &:hover .overlay {
     opacity: 1;

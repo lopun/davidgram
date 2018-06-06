@@ -28,12 +28,32 @@
         margin-left: 0;
         padding: 0 0;
       }
-      img {
-        width: 10em;
-        height: 10em;
-        border-radius: 50%;
-        margin-right: 2em;
-        padding: 0 auto;
+      .profile-image-wrapper{
+        width: 100%;
+        max-width: 10em;
+        display: flex;
+        align-items: center;
+        &:before {
+          content: "";
+          display: block;
+          padding-top: 100%;
+        }
+        .profile-image {
+          // max-width: 10em;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          border-radius: 50%;
+          margin-right: 2em;
+          padding: 0 auto;
+          @include breakpoint("tablet") {
+            width: 100%;
+          }
+          @include breakpoint("phone") {
+            width: 100%;
+          }
+        }
       }
       .row {
         width: 100%;
@@ -83,6 +103,7 @@
           .website {
             color: $dark-blue;
             cursor: pointer;
+            text-decoration: none;
           }
         }
       }
@@ -111,5 +132,9 @@
       border-top: 1px solid $font-black;
     }
   }
-  .images {}
+  .images {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
 }
