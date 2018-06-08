@@ -24,8 +24,14 @@ class Container extends Component {
   }
 
   render() {
-    return <Profile {...this.state} {...this.props} />;
+    return (
+      <Profile {...this.state} {...this.props} handleEdit={this.handleEdit} />
+    );
   }
+
+  handleEdit = () => {
+    this.props.editProfile();
+  };
 }
 
 export default Container;

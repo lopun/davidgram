@@ -312,9 +312,9 @@ function getNotifications() {
 function getProfile() {
   return (dispatch, getState) => {
     const {
-      user: { token }
+      user: { token, username }
     } = getState();
-    const username = localStorage.getItem("username");
+
     fetch(`/users/${username}/`, {
       headers: {
         Authorization: `JWT ${token}`
@@ -338,7 +338,8 @@ function getProfile() {
 const initialState = {
   // isLoggedIn: localStorage.getItem("jwt") || false 이부분이 실행되면 App의 presenter에서 proptypes가 bool인지 체크하는데 여기서 에러가 뜸!
   isLoggedIn: localStorage.getItem("jwt") ? true : false,
-  token: localStorage.getItem("jwt")
+  token: localStorage.getItem("jwt"),
+  username: localStorage.getItem("username")
 };
 
 const actionCreators = {
@@ -352,7 +353,8 @@ const actionCreators = {
   getExplore,
   searchByTerm,
   getNotifications,
-  getProfile
+  getProfile,
+  setUsername
 };
 
 // reducer

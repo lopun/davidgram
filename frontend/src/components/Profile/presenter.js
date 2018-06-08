@@ -6,8 +6,8 @@ import Loading from "components/Loading";
 import PhotoDisplay from "components/PhotoDisplay";
 
 const Profile = (props, context) => {
-  const { loggedInUser } = props;
-  if (props.loggedIn) {
+  const { loggedInUser, loggedIn, handleEdit } = props;
+  if (loggedIn) {
     return (
       <div className={styles.wrapper}>
         <div className={styles.profile}>
@@ -25,7 +25,9 @@ const Profile = (props, context) => {
           <div className={styles.column}>
             <div className={styles.row}>
               <div className={styles.name}>{loggedInUser.username}</div>
-              <div className={styles.button}>Edit Profile</div>
+              <div className={styles.button} onClick={handleEdit}>
+                Edit Profile
+              </div>
               <div className={styles.icon}>
                 <Ionicon icon="ios-settings" fontSize="28px" color="#" />
               </div>

@@ -10,6 +10,7 @@ import ResetForm from "components/ResetForm";
 import Explore from "components/Explore";
 import Search from "components/Search";
 import Profile from "components/Profile";
+import EditProfile from "components/EditProfile";
 
 const App = props => [
   // Nav bar
@@ -30,6 +31,7 @@ const PrivateRoutes = props => (
     <Route path="/explore" component={Explore} />
     <Route path="/search/:searchTerm" component={Search} />
     <Route path="/profile" component={Profile} />
+    <Route path="/accounts/edit" component={EditProfile} />
   </Switch>
 );
 

@@ -1,0 +1,13 @@
+.wrapper {
+  @include boxBorder(no);
+  width: 70%;
+  min-height: 300px;
+  display: flex;
+  margin: 120px auto;
+  .column {
+    width: 1fr;
+    &:last-child{
+      width: 2fr;
+    }
+  }
+}
