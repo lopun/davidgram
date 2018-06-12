@@ -10,7 +10,8 @@ class Container extends Component {
     Email: "",
     Contact: "",
     Gender: "",
-    Recommend: ""
+    Recommend: "",
+    active: "Edit"
   };
   render() {
     return (
@@ -18,9 +19,16 @@ class Container extends Component {
         {...this.props}
         {...this.state}
         handleChange={this.handleChange}
+        handleTap={this.handleTap}
       />
     );
   }
+
+  handleTap = e => {
+    this.setState({
+      active: e.target.name
+    });
+  };
 
   handleChange = e => {
     this.setState({

@@ -6,7 +6,7 @@ const UserListRow = (props, context) => {
   const {
     user: { id, profile_image, username }
   } = props;
-  console.log(id, profile_image, username);
+  console.log("Rendering");
   return (
     <div className={styles.boxWrapper}>
       <div className={styles.userWrapper}>

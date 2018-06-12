@@ -8,6 +8,7 @@ class Container extends Component {
     dispatch(userActions.getExplore());
     // userList에 업데이트 해주기 위함이다.
   }
+
   render() {
     return <Notification {...this.props} />;
   }

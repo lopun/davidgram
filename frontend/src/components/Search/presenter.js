@@ -44,7 +44,7 @@ const NotFound = props => <span className={styles.notFound}>{props.text}</span>;
 const RenderUserSearch = props =>
   props.userList.map(user => <UserListColumn user={user} key={user.id} />);
 const RenderImageSearch = props =>
-  props.imageList.map(photo => <PhotoDisplay photo={photo} />);
+  props.imageList.map(photo => <PhotoDisplay photo={photo} key={photo.id} />);
 
 Search.contextTypes = {
   t: PropTypes.func.isRequired

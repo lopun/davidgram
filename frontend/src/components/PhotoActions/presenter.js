@@ -14,7 +14,7 @@ const PhotoActions = (props, context) => {
             <Ionicon icon="ios-heart-outline" fontSize="26px" color="black" />
           )}
         </span>
-        <span className={styles.icon} onClick={props.handleHeartClick}>
+        <span className={styles.icon}>
           <Ionicon icon="ios-text-outline" fontSize="26px" color="black" />
         </span>
       </div>

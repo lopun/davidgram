@@ -8,7 +8,6 @@ import CommentBox from "components/CommentBox";
 import UserList from "components/UserList";
 
 const FeedPhoto = (props, context) => {
-  console.log(props);
   return (
     <div className={styles.feedPhoto}>
       <header>
@@ -59,26 +58,26 @@ FeedPhoto.propTypes = {
   // shape으로 작업을 하면 prop들의 propTypes를 더욱 명확히 해줄 수 있다.
   creator: PropTypes.shape({
     profile_image: PropTypes.string,
-    usersname: PropTypes.string.isRequired
+    usersname: PropTypes.string
   }),
-  location: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  like_count: PropTypes.number.isRequired,
-  caption: PropTypes.string.isRequired,
+  location: PropTypes.string,
+  image: PropTypes.string,
+  like_count: PropTypes.number,
+  caption: PropTypes.string,
   comments: PropTypes.arrayOf(
     PropTypes.shape({
-      message: PropTypes.string.isRequired,
+      message: PropTypes.string,
       creator: PropTypes.shape({
         profile_image: PropTypes.string,
-        usersname: PropTypes.string.isRequired
-      }).isRequired
+        usersname: PropTypes.string
+      })
     })
   ),
-  natural_time: PropTypes.string.isRequired,
-  is_liked: PropTypes.bool.isRequired,
-  seeingLikes: PropTypes.bool.isRequired,
-  closeLikes: PropTypes.func.isRequired,
-  openLikes: PropTypes.func.isRequired
+  natural_time: PropTypes.string,
+  is_liked: PropTypes.bool,
+  seeingLikes: PropTypes.bool,
+  closeLikes: PropTypes.func,
+  openLikes: PropTypes.func
 };
 
 export default FeedPhoto;

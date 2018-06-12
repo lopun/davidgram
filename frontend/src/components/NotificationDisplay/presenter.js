@@ -3,7 +3,7 @@ import styles from "./styles.scss";
 import PropTypes from "prop-types";
 
 const NotificationDisplay = (props, context) => {
-  const { notification, handleClick } = props;
+  const { notification, handleClick, following } = props;
   switch (notification.notification_type) {
     case "comment":
       return (
@@ -91,7 +91,7 @@ const NotificationDisplay = (props, context) => {
             </span>
           </p>
           <div className={styles.follow} onClick={handleClick}>
-            {props.following ? context.t("Unfollow") : context.t("Follow")}
+            {following ? context.t("Unfollow") : context.t("Follow")}
           </div>
         </div>
       );
@@ -102,6 +102,32 @@ const NotificationDisplay = (props, context) => {
 
 NotificationDisplay.contextTypes = {
   t: PropTypes.func.isRequired
+};
+
+NotificationDisplay.propTypes = {
+  notification: PropTypes.objectOf(
+    PropTypes.shape({
+      comment: PropTypes.string.isRequired,
+      created_at: PropTypes.string.isRequired,
+      creator: PropTypes.shape({
+        following: PropTypes.bool.isRequired,
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        profile_image: PropTypes.string,
+        usersname: PropTypes.string.isRequired
+      }),
+      id: PropTypes.number.isRequired,
+      image: PropTypes.shape({
+        file: PropTypes.string
+      }),
+      natural_time: PropTypes.string.isRequired,
+      notification_type: PropTypes.func.isRequired,
+      to: PropTypes.number.isRequired,
+      updated_at: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  handleClick: PropTypes.func.isRequired,
+  following: PropTypes.bool.isRequired
 };
 
 export default NotificationDisplay;

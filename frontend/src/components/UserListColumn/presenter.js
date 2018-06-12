@@ -6,7 +6,6 @@ const UserListColumn = (props, context) => {
   const {
     user: { id, profile_image, username }
   } = props;
-  console.log(id, profile_image, username);
   return (
     <div className={styles.boxWrapper}>
       <div className={styles.userWrapper}>

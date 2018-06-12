@@ -1,13 +1,99 @@
 .wrapper {
   @include boxBorder(no);
-  width: 70%;
+  width: 100%;
+  max-width: $max-page-width;
   min-height: 300px;
   display: flex;
   margin: 120px auto;
   .column {
-    width: 1fr;
+    min-width: 237px;
+    min-height: 800px;
     &:last-child{
       width: 2fr;
+      .profile {
+        display: flex;
+        align-items: center;
+        padding: 2rem 7rem;
+        margin-bottom: 1rem;
+        .image {
+          width: $profile-image-size;
+          height: $profile-image-size;
+          border-radius: 100%;
+        }
+        .user {
+          display: flex;
+          flex-direction: column;
+          margin-left: 2rem;
+          .username {
+            font-size: $biggest-font-size;
+            font-weight: 400;
+          }
+          .edit {
+            font-size: $normal-font-size;
+            text-decoration: none;
+            color: $light-blue;
+            padding-top: 4px;
+          }
+        }
+      }
     }
+    &:first-child{
+      border-right: 1px solid #dbdbdb;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .tap-row {
+      font-size: $big-font-size;
+      cursor: pointer;
+      border: none;
+      padding: 1em 1.5rem;
+      &:focus {
+        outline: none;
+      }
+    }
+    .active {
+      font-weight: 600;
+      border-left: 2px solid black;
+    }
+  }
+}
+
+.horizontal {
+  margin-left: 11rem;
+  padding-bottom: 1rem;
+  .horizontal-text {
+    font-size: $big-font-size;
+    font-weight: 600;
+    color: $dark-gray;
+  }
+}
+
+.input-wrapper {
+  display: flex;
+  padding-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  width: 100%;
+  .title {
+    font-size: $big-font-size;
+    font-weight: 600;
+    width: 7.5em;
+    min-width: 7rem;
+    text-align: right;
+    padding-top: .4rem;
+  }
+  .input {
+    @include boxBorder(yes);
+    flex: 1;
+    box-sizing: border-box;
+    width: 355px;
+    height: 2rem;
+    margin-left: 2rem;
+    &:focus {
+      outline: none;
+    }
+  }
+  .big-input {
+    height: 4rem;
   }
 }

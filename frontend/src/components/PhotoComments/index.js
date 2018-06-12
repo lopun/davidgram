@@ -32,7 +32,7 @@ PhotoComments.propTypes = {
       message: PropTypes.string.isRequired,
       creator: PropTypes.shape({
         profile_image: PropTypes.string,
-        usersname: PropTypes.string.isRequired
+        usersname: PropTypes.string
       }).isRequired
     })
   ).isRequired

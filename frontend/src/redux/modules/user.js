@@ -233,7 +233,6 @@ function getExplore() {
         if (response.status === 401) {
           dispatch(logout());
         }
-        console.log(response);
         return response.json();
       })
       .then(json => dispatch(setUserList(json)));
@@ -302,7 +301,6 @@ function getNotifications() {
         return response.json();
       })
       .then(json => {
-        console.log(json);
         dispatch(setNotifications(json));
       })
       .catch(err => console.log(err));
@@ -327,7 +325,6 @@ function getProfile() {
         return response.json();
       })
       .then(json => {
-        console.log(json);
         dispatch(setProfile(json));
       })
       .catch(err => console.log(err));

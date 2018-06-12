@@ -70,7 +70,9 @@ const Profile = (props, context) => {
           <div className={styles.tapColumn}>Saved</div>
         </div>
         <div className={styles.images}>
-          {loggedInUser.images.map(image => <PhotoDisplay photo={image} />)}
+          {loggedInUser.images.map(image => (
+            <PhotoDisplay photo={image} key={image.id} />
+          ))}
         </div>
       </div>
     );

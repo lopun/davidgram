@@ -35,4 +35,10 @@ Notification.contextTypes = {
   t: PropTypes.func.isRequired
 };
 
+Notification.propTypes = {
+  getNotifications: PropTypes.func,
+  notificationList: PropTypes.array,
+  handleFollow: PropTypes.func
+};
+
 export default Notification;
