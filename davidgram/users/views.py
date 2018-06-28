@@ -98,6 +98,28 @@ class UserProfile(APIView):
 
                 return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class SimpleUserProfile(APIView):
+
+    def get_user(self, username):
+
+        try:
+            found_user = models.User.objects.get(username=username)
+            return found_user
+        except models.User.DoesNotExist:
+            return None
+
+    def get(self, request, username, format=None):
+
+        user = request.user
+        found_user = self.get_user(username)
+
+        if found_user is None:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = serializers.SimpleUserProfileSerializer(found_user)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
 class UserFollowers(APIView):
 
     def get(self, request, username, format=None):

@@ -30,6 +30,11 @@ urlpatterns = [
     name='user_following'
   ),
   url(
+    regex=r'^(?P<username>\w+)/simple/$',
+    view=views.SimpleUserProfile.as_view(),
+    name='simple_user_profile'
+  ),
+  url(
     regex=r'^search/$',
     view=views.Search.as_view(),
     name='search'

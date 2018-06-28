@@ -33,6 +33,15 @@ class UserProfileSerializer(serializers.ModelSerializer):
       'images',
     )
 
+class SimpleUserProfileSerializer(serializers.ModelSerializer):
+
+  class Meta:
+    model = models.User
+    fields = (
+      'profile_image',
+      'username',
+    )
+
 
 class ListUserSerializer(serializers.ModelSerializer):
 

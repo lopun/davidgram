@@ -1,0 +1,17 @@
+.horizontal {
+  margin-left: 11rem;
+  padding-bottom: 1rem;
+  .horizontal-text {
+    font-size: $big-font-size;
+    font-weight: 600;
+    color: $dark-gray;
+  }
+  &:last-child {
+    padding-top: 1.5rem;
+    display: flex;
+    .button {
+      @include blueButton();
+      max-width: 10rem;
+    }
+  }
+}

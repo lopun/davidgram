@@ -11,6 +11,7 @@ const SET_IMAGE_LIST = "SET_IMAGE_LIST";
 const SET_NOTIFICATIONS = "SET_NOTIFICATIONS";
 const SET_USERNAME = "SET_USERNAME";
 const SET_PROFILE = "SET_PROFILE";
+const SET_SIMPLE_PROFILE = "SET_SIMPLE_PROFILE";
 
 // action creators
 
@@ -74,6 +75,13 @@ function setProfile(loggedInUser) {
   return {
     type: SET_PROFILE,
     loggedInUser
+  };
+}
+
+function setSimpleProfile(simpleUser) {
+  return {
+    type: SET_SIMPLE_PROFILE,
+    simpleUser
   };
 }
 
@@ -331,6 +339,50 @@ function getProfile() {
   };
 }
 
+function getSimpleProfile() {
+  return (dispatch, getState) => {
+    const {
+      user: { token, username }
+    } = getState();
+
+    fetch(`/users/${username}/simple/`, {
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+      .then(response => {
+        if (response.status === 401) {
+          dispatch(logout());
+        }
+        return response.json();
+      })
+      .then(json => {
+        dispatch(setSimpleProfile(json));
+      })
+      .catch(err => console.log(err));
+  };
+}
+
+function setPassword(current_password, new_password) {
+  return (dispatch, getState) => {
+    const {
+      user: { token, username }
+    } = getState();
+
+    fetch(`/users/${username}/password/`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `JWT ${token}`
+      },
+      body: JSON.stringify({
+        current_password,
+        new_password
+      })
+    });
+  };
+}
+
 // Initial State
 const initialState = {
   // isLoggedIn: localStorage.getItem("jwt") || false 이부분이 실행되면 App의 presenter에서 proptypes가 bool인지 체크하는데 여기서 에러가 뜸!
@@ -351,7 +403,9 @@ const actionCreators = {
   searchByTerm,
   getNotifications,
   getProfile,
-  setUsername
+  getSimpleProfile,
+  setUsername,
+  setPassword
 };
 
 // reducer
@@ -377,6 +431,8 @@ function reducer(state = initialState, action) {
       return applySetUsername(state, action);
     case SET_PROFILE:
       return applySetProfile(state, action);
+    case SET_SIMPLE_PROFILE:
+      return applySetSimpleProfile(state, action);
     default:
       return state;
   }
@@ -464,6 +520,14 @@ function applySetProfile(state, action) {
   return {
     ...state,
     loggedInUser
+  };
+}
+
+function applySetSimpleProfile(state, action) {
+  const { simpleUser } = action;
+  return {
+    ...state,
+    simpleUser
   };
 }
 

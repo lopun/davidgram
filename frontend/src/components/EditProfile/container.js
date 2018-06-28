@@ -11,8 +11,25 @@ class Container extends Component {
     Contact: "",
     Gender: "",
     Recommend: "",
-    active: "Edit"
+    CurrentPassword: "",
+    NewPassword1: "",
+    NewPassword2: "",
+    active: "Edit",
+    loading: true
   };
+
+  componentWillMount() {
+    this.props.getSimpleProfile();
+  }
+
+  componentWillUpdate(prevProps, prevState) {
+    if (prevProps.simpleUser !== this.props.simpleUser) {
+      this.setState({
+        loading: false
+      });
+    }
+  }
+
   render() {
     return (
       <EditProfile
@@ -20,6 +37,7 @@ class Container extends Component {
         {...this.state}
         handleChange={this.handleChange}
         handleTap={this.handleTap}
+        handlePassword={this.handlePassword}
       />
     );
   }
@@ -34,6 +52,18 @@ class Container extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+  };
+
+  handlePassword = () => {
+    const { CurrentPassword, NewPassword1, NewPassword2 } = this.state;
+    if (NewPassword1 === NewPassword2) {
+      this.props.changePassword(CurrentPassword, NewPassword1);
+      this.setState({
+        CurrentPassword: "",
+        NewPassword1: "",
+        NewPassword2: ""
+      });
+    }
   };
 }
 

@@ -1,0 +1,54 @@
+.input-wrapper {
+  display: flex;
+  padding-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  width: 100%;
+  .title {
+    font-size: $big-font-size;
+    font-weight: 600;
+    width: 7.5em;
+    min-width: 7rem;
+    text-align: right;
+    padding-top: .4rem;
+  }
+  .checkbox-wrapper {
+    margin-left: 2rem;
+    display: flex;
+    padding-top: .4rem;
+    width: 100%;
+    max-width: 460px;
+    .checkbox {
+      width: 1.2rem;
+      height: 1.2rem;
+      background-color: white;
+      border: 1px solid #dbdbdb;
+    }
+    .similar {
+      font-size: $big-font-size;
+    }
+  }
+}
+
+.horizontal {
+  margin-left: 11rem;
+  padding-bottom: 1rem;
+  .horizontal-text {
+    font-size: $big-font-size;
+    font-weight: 600;
+    color: $dark-gray;
+  }
+  &:last-child {
+    padding-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    .button {
+      @include blueButton();
+      max-width: 5rem;
+    }
+    .disable {
+      font-size: $big-font-size;
+      margin-left: 5rem;
+      color: $light-blue;
+    }
+  }
+}
