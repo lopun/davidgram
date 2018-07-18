@@ -38,6 +38,17 @@ USE_TZ = True
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'davidgram',
+        'USER': 'david',
+        'PASSWORD': 'kjh5270!@#@!',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
+
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 # URLS
