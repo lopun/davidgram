@@ -45,6 +45,7 @@ function addComment(photoId, comment) {
 
 function getFeed() {
   // getState은 redux-thunk에서 온것이다.
+
   return (dispatch, getState) => {
     const {
       user: { token }

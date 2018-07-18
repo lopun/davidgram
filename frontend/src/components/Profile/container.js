@@ -22,7 +22,6 @@ class Container extends Component {
       });
     }
   }
-
   render() {
     return (
       <Profile {...this.state} {...this.props} handleEdit={this.handleEdit} />
