@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from rest_framework_jwt.views import obtain_jwt_token
-from nomadgram import views
+from davidgram import views
 
 urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
@@ -15,10 +15,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
-    url(r'^users/', include('nomadgram.users.urls', namespace='users')),
-    url(r'^images/', include('nomadgram.images.urls', namespace='images')),
+    url(r'^users/', include('davidgram.users.urls', namespace='users')),
+    url(r'^images/', include('davidgram.images.urls', namespace='images')),
     url(r'^notifications/',
-        include('nomadgram.notifications.urls', namespace='notifications')),
+        include('davidgram.notifications.urls', namespace='notifications')),
     url(r'^accounts/', include('allauth.urls')),
 
 
