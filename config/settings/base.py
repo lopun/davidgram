@@ -37,18 +37,6 @@ USE_TZ = True
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'davidgram',
-        'USER': 'david',
-        'PASSWORD': 'postgresplayground',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
-
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 # URLS
@@ -281,8 +269,8 @@ REST_FRAMEWORK = {
         # 이부분은 Front / App을 위해서 남겨놓은것!
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         # 아래 두개는 Admin을 위한 거다.
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
     ),
 }
 
