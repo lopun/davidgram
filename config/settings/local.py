@@ -8,12 +8,7 @@ DEBUG = env.bool('DJANGO_DEBUG', default=True)
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env('DJANGO_SECRET_KEY', default='XLyclclbO9AczbdKrUxSi5eUY9sWi4Q6HETzRRA75qGMNFFI0B751UyZ1TazuLuD')
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = [
-    "localhost",
-    "0.0.0.0",
-    "127.0.0.1",
-    "davidgram.ap-northeast-2.elasticbeanstalk.com"
-]
+ALLOWED_HOSTS = ['*']
 
 # CACHES
 # ------------------------------------------------------------------------------
@@ -34,16 +29,16 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG  # noqa F405
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 # EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# https://docs.djangoproject.com/en/dev/ref/settings/#email-host
-EMAIL_HOST = 'smtp.gmail.com' # default : 'localhost'
-# https://docs.djangoproject.com/en/dev/ref/settings/#email-port
-EMAIL_PORT = 587 # default : 1025
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'ujin43255252@gmail.com'
-# EMAIL_HOST_PASSWORD = 'password from https://security.google.com/settings/security/apppasswords'
-EMAIL_HOST_PASSWORD = 'kjh5270!@#@!'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# # https://docs.djangoproject.com/en/dev/ref/settings/#email-host
+# EMAIL_HOST = 'smtp.gmail.com' # default : 'localhost'
+# # https://docs.djangoproject.com/en/dev/ref/settings/#email-port
+# EMAIL_PORT = 587 # default : 1025
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'ujin43255252@gmail.com'
+# # EMAIL_HOST_PASSWORD = 'password from https://security.google.com/settings/security/apppasswords'
+# EMAIL_HOST_PASSWORD = 'kjh5270!@#@!'
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # django-debug-toolbar
 # ------------------------------------------------------------------------------
