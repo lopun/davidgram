@@ -19,7 +19,7 @@ services:
     ports:
       - "16500:5000"
       - "16400:3000"
-      - "8000:8000"
+      - "16499:8000"
     command:
       - /home/davidgram/docker_config/django_start.sh
     depends_on:
