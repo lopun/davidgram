@@ -72,7 +72,7 @@ const EditProfile = (props, context) => {
             <div className={styles.user}>
               <span className={styles.username}>{simpleUser.username}</span>
               {active === "Edit" && (
-                <a className={styles.edit} href="#">
+                <a className={styles.edit} href="/">
                   {context.t("Change Profile Image")}
                 </a>
               )}

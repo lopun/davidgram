@@ -4,7 +4,7 @@ import styles from "./styles.scss";
 
 const UserListColumn = (props, context) => {
   const {
-    user: { id, profile_image, username }
+    user: { profile_image, username }
   } = props;
   return (
     <div className={styles.boxWrapper}>

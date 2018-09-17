@@ -1,0 +1,16 @@
+version: "2"
+
+services:
+  db:
+    image: postgres
+  web:
+    image: lopun/davidgram:0.1
+    volumes:
+      - ./:/home/davidgram
+    ports:
+      - "16500:5000"
+      - "8000:8000"
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true

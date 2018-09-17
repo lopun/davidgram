@@ -207,7 +207,7 @@ module.exports = {
                       loader: require.resolve("sass-loader"),
                       options: {
                         sourceMap: true,
-                        data: `@import "C:/Users/david/Portfolio/CS/davidgram/frontend/src/config/_variables.scss";`
+                        data: `@import "/home/davidgram/frontend/src/config/_variables.scss";`
                       }
                     }
                   ]
