@@ -1,16 +1,30 @@
 version: "2"
 
 services:
+
   db:
+    container_name: davidgram_db
     image: postgres
+    volumes:
+      - ./postgresql_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    ports:
+      - "16501:5432"
+
   web:
+    container_name: davidgram_web
     image: lopun/davidgram:0.1
     volumes:
       - ./:/home/davidgram
     ports:
       - "16500:5000"
+      - "16400:3000"
       - "8000:8000"
+    command:
+      - /home/davidgram/docker_config/django_start.sh
     depends_on:
       - db
+    links:
+      - db:db
     tty: true
     stdin_open: true

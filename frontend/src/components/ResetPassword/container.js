@@ -12,7 +12,7 @@ class Container extends Component {
     const { token, uid } = this.props.match.params;
     const { password1, password2 } = this.state;
     console.log(token, uid, password1, password2);
-    fetch("/rest-auth/password/reset/confirm/", {
+    fetch("http://localhost:8000/rest-auth/password/reset/confirm/", {
       method: "post",
       headers: {
         "Content-Type": "application/json"

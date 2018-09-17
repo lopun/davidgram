@@ -289,3 +289,6 @@ davidgram/media/
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# POSTGRESQL DATABASE
+postgresql_data/

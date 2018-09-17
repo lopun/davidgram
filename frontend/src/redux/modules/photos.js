@@ -50,7 +50,7 @@ function getFeed() {
     const {
       user: { token }
     } = getState();
-    fetch("/images/", {
+    fetch("http://localhost:8000/images/", {
       headers: {
         Authorization: `JWT ${token}`
       }
@@ -78,7 +78,7 @@ function likePhoto(photoId) {
     const {
       user: { token }
     } = getState();
-    fetch(`/images/${photoId}/likes/`, {
+    fetch(`http://localhost:8000/images/${photoId}/likes/`, {
       method: "POST",
       headers: {
         Authorization: `JWT ${token}`
@@ -100,7 +100,7 @@ function unlikePhoto(photoId) {
     const {
       user: { token }
     } = getState();
-    fetch(`/images/${photoId}/unlikes/`, {
+    fetch(`http://localhost:8000/images/${photoId}/unlikes/`, {
       method: "DELETE",
       headers: {
         Authorization: `JWT ${token}`
@@ -121,7 +121,7 @@ function commentPhoto(photoId, message) {
     const {
       user: { token }
     } = getState();
-    fetch(`/images/${photoId}/comments/`, {
+    fetch(`http://localhost:8000/images/${photoId}/comments/`, {
       method: "POST",
       headers: {
         Authorization: `JWT ${token}`,
