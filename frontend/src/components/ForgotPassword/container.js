@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ForgotPassword from "./presenter";
+import axios from "../../axios-auth";
 
 class Container extends Component {
   state = {
@@ -8,22 +9,16 @@ class Container extends Component {
 
   _handleSubmit = () => {
     const { input } = this.state;
-    fetch("http://localhost:16499/rest-auth/password/reset/", {
+    axios({
       method: "post",
+      url: "/rest-auth/password/reset/",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
+      data: JSON.stringify({
         email: input
       })
-    })
-      .then(response => {
-        console.log(response);
-        return response.json();
-      })
-      .then(json => console.log(json))
-      .catch(err => console.log(err));
-    console.log("submitted", input);
+    }).catch(err => console.log(err));
   };
 
   _handleChange = e => {

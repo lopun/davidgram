@@ -1,5 +1,5 @@
 // imports
-
+import axios from "../../axios-auth";
 // actions
 
 const SAVE_TOKEN = "SAVE_TOKEN";
@@ -92,21 +92,21 @@ function setSimpleProfile(simpleUser) {
 // proxy에 해당하는 localhost:8000/users/login/facebook/으로 가게 된다.
 function facebookLogin(access_token) {
   return function(dispatch) {
-    fetch("http://localhost:16499/users/login/facebook/", {
-      method: "POST",
+    axios({
+      method: "post",
+      url: "/users/login/facebook/",
       headers: {
-        "Content-type": "application/json"
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        access_token
-        // Body에 넣어서 보내면 토큰을 받아서 유저 authentication을 할 수 있다.
-        //access_token : access_token ES6 grammer
-      })
+      data: {
+        body: JSON.stringify({
+          access_token
+        })
+      }
     })
-      .then(response => response.json())
-      .then(json => {
-        if (json.token) {
-          dispatch(saveToken(json.token));
+      .then(response => {
+        if (response.data.token) {
+          dispatch(saveToken(response.data.token));
         }
       })
       .catch(err => console.log(err));
@@ -115,20 +115,22 @@ function facebookLogin(access_token) {
 
 function usernameLogin(username, password) {
   return function(dispatch) {
-    fetch("http://localhost:16499/rest-auth/login/", {
-      method: "POST",
+    axios({
+      method: "post",
+      url: "/rest-auth/login/",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        username,
-        password
-      })
+      data: {
+        body: JSON.stringify({
+          username,
+          password
+        })
+      }
     })
-      .then(response => response.json())
-      .then(json => {
-        if (json.token) {
-          dispatch(saveToken(json.token));
+      .then(response => {
+        if (response.data.token) {
+          dispatch(saveToken(response.data.token));
           dispatch(setUsername(username));
         }
       })
@@ -138,28 +140,31 @@ function usernameLogin(username, password) {
 
 function createAccount(username, password, email, name) {
   return function(dispatch) {
-    fetch("http://localhost:16499/rest-auth/registration/", {
-      method: "POST",
+    axios({
+      method: "post",
+      url: "/rest-auth/registration/",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        username,
-        password1: password,
-        password2: password,
-        email,
-        name
-      })
+      data: {
+        body: JSON.stringify({
+          username,
+          password1: password,
+          password2: password,
+          email,
+          name
+        })
+      }
     })
-      .then(response => response.json())
-      .then(json => {
-        if (json.token) {
-          dispatch(saveToken(json.token));
+      .then(response => {
+        if (response.data.token) {
+          dispatch(saveToken(response.data.token));
         }
-        if (json.user) {
-          dispatch(setProfile(json.user));
+        if (response.data.user) {
+          dispatch(setProfile(response.data.user));
         }
-      });
+      })
+      .catch(err => console.log(err));
   };
 }
 
@@ -168,7 +173,9 @@ function getPhotoLikes(photoId) {
     const {
       user: { token }
     } = getState();
-    fetch(`/images/${photoId}/likes/`, {
+    axios({
+      method: "get",
+      url: `/images/${photoId}/likes/`,
       headers: {
         Authorization: `JWT ${token}`
       }
@@ -181,7 +188,8 @@ function getPhotoLikes(photoId) {
       })
       .then(json => {
         dispatch(setUserList(json));
-      });
+      })
+      .catch(err => console.log(err));
   };
 }
 
@@ -191,8 +199,9 @@ function followUser(userId) {
     const {
       user: { token }
     } = getState();
-    fetch(`/users/${userId}/follow/`, {
-      method: "POST",
+    axios({
+      method: "post",
+      url: `/users/${userId}/follow/`,
       headers: {
         Authorization: `JWT ${token}`,
         "Content-Type": "application/json"
@@ -213,8 +222,9 @@ function unfollowUser(userId) {
     const {
       user: { token }
     } = getState();
-    fetch(`/users/${userId}/unfollow/`, {
-      method: "POST",
+    axios({
+      method: "post",
+      url: `/users/${userId}/unfollow/`,
       headers: {
         Authorization: `JWT ${token}`,
         "Content-Type": "application/json"
@@ -234,19 +244,18 @@ function getExplore() {
     const {
       user: { token }
     } = getState();
-    fetch(`/users/explore/`, {
-      method: "GET",
+    axios({
+      method: "get",
+      url: "/users/explore/",
       headers: {
         Authorization: `JWT ${token}`
       }
-    })
-      .then(response => {
-        if (response.status === 401) {
-          dispatch(logout());
-        }
-        return response.json();
-      })
-      .then(json => dispatch(setUserList(json)));
+    }).then(response => {
+      if (response.status === 401) {
+        dispatch(logout());
+      }
+      dispatch(setUserList(response.data));
+    });
   };
 }
 
@@ -266,33 +275,33 @@ function searchByTerm(searchTerm) {
 }
 
 function searchUsers(token, searchTerm) {
-  return fetch(`/users/search/?username=${searchTerm}`, {
+  return axios({
+    method: "get",
+    url: `/users/search/?username=${searchTerm}`,
     headers: {
       Authorization: `JWT ${token}`
     }
-  })
-    .then(response => {
-      if (response.status === 401) {
-        return 401;
-      }
-      return response.json();
-    })
-    .then(json => json);
+  }).then(response => {
+    if (response.status === 401) {
+      return 401;
+    }
+    return response.data;
+  });
 }
 
 function searchImages(token, searchTerm) {
-  return fetch(`/images/search/?hashtags=${searchTerm}`, {
+  return axios({
+    method: "get",
+    url: `/images/search/?hashtags=${searchTerm}`,
     headers: {
       Authorization: `JWT ${token}`
     }
-  })
-    .then(response => {
-      if (response.status === 401) {
-        return 401;
-      }
-      return response.json();
-    })
-    .then(json => json);
+  }).then(response => {
+    if (response.status === 401) {
+      return 401;
+    }
+    return response.data;
+  });
 }
 
 function getNotifications() {
@@ -300,7 +309,9 @@ function getNotifications() {
     const {
       user: { token }
     } = getState();
-    fetch("http://localhost:16499/notifications/", {
+    axios({
+      method: "get",
+      url: "/notifications/",
       headers: {
         Authorization: `JWT ${token}`
       }
@@ -309,10 +320,8 @@ function getNotifications() {
         if (response.status === 401) {
           dispatch(logout());
         }
-        return response.json();
-      })
-      .then(json => {
-        dispatch(setNotifications(json));
+        dispatch(setNotifications(response.data));
+        return;
       })
       .catch(err => console.log(err));
   };
@@ -324,7 +333,9 @@ function getProfile() {
       user: { token, username }
     } = getState();
 
-    fetch(`/users/${username}/`, {
+    axios({
+      method: "get",
+      url: `/users/${username}/`,
       headers: {
         Authorization: `JWT ${token}`
       }
@@ -333,10 +344,8 @@ function getProfile() {
         if (response.status === 401) {
           dispatch(logout());
         }
-        return response.json();
-      })
-      .then(json => {
-        dispatch(setProfile(json));
+        dispatch(setProfile(response.data));
+        return;
       })
       .catch(err => console.log(err));
   };
@@ -348,7 +357,9 @@ function getSimpleProfile() {
       user: { token, username }
     } = getState();
 
-    fetch(`/users/${username}/simple/`, {
+    axios({
+      method: "get",
+      url: `/users/${username}/simple/`,
       headers: {
         Authorization: `JWT ${token}`
       }
@@ -357,10 +368,7 @@ function getSimpleProfile() {
         if (response.status === 401) {
           dispatch(logout());
         }
-        return response.json();
-      })
-      .then(json => {
-        dispatch(setSimpleProfile(json));
+        dispatch(setSimpleProfile(response.data));
       })
       .catch(err => console.log(err));
   };
@@ -372,13 +380,14 @@ function setPassword(current_password, new_password) {
       user: { token, username }
     } = getState();
 
-    fetch(`/users/${username}/password/`, {
-      method: "PUT",
+    axios({
+      method: "put",
+      url: `/users/${username}/password/`,
       headers: {
         "Content-type": "application/json",
         Authorization: `JWT ${token}`
       },
-      body: JSON.stringify({
+      data: JSON.stringify({
         current_password,
         new_password
       })

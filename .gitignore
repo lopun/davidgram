@@ -297,3 +297,6 @@ davidgram/media/
 
 # POSTGRESQL DATABASE
 postgresql_data/
+
+# Personal URL
+frontend/src/variables.js

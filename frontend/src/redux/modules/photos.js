@@ -1,6 +1,7 @@
 //imports
 
 import { actionCreators as userActions } from "redux/modules/user";
+import axios from "../../axios-auth";
 
 // actions
 
@@ -50,23 +51,21 @@ function getFeed() {
     const {
       user: { token }
     } = getState();
-    fetch("http://localhost:16499/images/", {
+    axios({
+      method: "get",
+      url: "/images/",
       headers: {
         Authorization: `JWT ${token}`
       }
-    })
-      .then(response => {
-        if (response.status === 401) {
-          dispatch(userActions.logout());
-          // bullshit token에 대해서 강제로 로그아웃을 진행하게 하는 부분이다.
-          // 새로고침을 하면 Feed Component가 마운트 되고 이떄 getFeed를 불러온다.
-          // 이때 unauthorized이라면 로그아웃이 된다!
-        }
-        return response.json();
-      })
-      .then(json => {
-        dispatch(setFeed(json));
-      });
+    }).then(response => {
+      if (response.status === 401) {
+        dispatch(userActions.logout());
+        // bullshit token에 대해서 강제로 로그아웃을 진행하게 하는 부분이다.
+        // 새로고침을 하면 Feed Component가 마운트 되고 이떄 getFeed를 불러온다.
+        // 이때 unauthorized이라면 로그아웃이 된다!
+      }
+      dispatch(setFeed(response.data));
+    });
   };
 }
 
@@ -78,8 +77,9 @@ function likePhoto(photoId) {
     const {
       user: { token }
     } = getState();
-    fetch(`/images/${photoId}/likes/`, {
-      method: "POST",
+    axios({
+      method: "post",
+      url: `/images/${photoId}/likes/`,
       headers: {
         Authorization: `JWT ${token}`
       }
@@ -100,8 +100,9 @@ function unlikePhoto(photoId) {
     const {
       user: { token }
     } = getState();
-    fetch(`/images/${photoId}/unlikes/`, {
-      method: "DELETE",
+    axios({
+      method: "delete",
+      url: `/images/${photoId}/unlikes/`,
       headers: {
         Authorization: `JWT ${token}`
       }
@@ -121,13 +122,14 @@ function commentPhoto(photoId, message) {
     const {
       user: { token }
     } = getState();
-    fetch(`/images/${photoId}/comments/`, {
-      method: "POST",
+    axios({
+      method: "post",
+      url: `/images/${photoId}/comments/`,
       headers: {
         Authorization: `JWT ${token}`,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
+      data: JSON.stringify({
         message
       })
     })
@@ -135,11 +137,11 @@ function commentPhoto(photoId, message) {
         if (response.status === 401) {
           dispatch(userActions.logout());
         }
-        return response.json();
+        return response.data;
       })
-      .then(json => {
-        if (json.message) {
-          dispatch(addComment(photoId, json));
+      .then(data => {
+        if (data.message) {
+          dispatch(addComment(photoId, data));
         }
       });
   };
