@@ -146,15 +146,13 @@ function createAccount(username, password, email, name) {
       headers: {
         "Content-Type": "application/json"
       },
-      data: {
-        body: JSON.stringify({
-          username,
-          password1: password,
-          password2: password,
-          email,
-          name
-        })
-      }
+      data: JSON.stringify({
+        username,
+        password1: password,
+        password2: password,
+        email,
+        name
+      })
     })
       .then(response => {
         if (response.data.token) {
