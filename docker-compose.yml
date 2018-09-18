@@ -7,8 +7,6 @@ services:
     # volumes:
     #   - ./postgresql_data:/var/lib/postgresql/data
     restart: unless-stopped
-    ports:
-      - "16501:5432"
 
   web:
     container_name: davidgram_web

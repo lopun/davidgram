@@ -50,7 +50,7 @@ function getFeed() {
     const {
       user: { token }
     } = getState();
-    fetch("http://ssal.sparcs.org:16499/images/", {
+    fetch("http://localhost:16499/images/", {
       headers: {
         Authorization: `JWT ${token}`
       }
@@ -78,7 +78,7 @@ function likePhoto(photoId) {
     const {
       user: { token }
     } = getState();
-    fetch(`http://ssal.sparcs.org:16499/images/${photoId}/likes/`, {
+    fetch(`/images/${photoId}/likes/`, {
       method: "POST",
       headers: {
         Authorization: `JWT ${token}`
@@ -100,7 +100,7 @@ function unlikePhoto(photoId) {
     const {
       user: { token }
     } = getState();
-    fetch(`http://ssal.sparcs.org:16499/images/${photoId}/unlikes/`, {
+    fetch(`/images/${photoId}/unlikes/`, {
       method: "DELETE",
       headers: {
         Authorization: `JWT ${token}`
@@ -121,7 +121,7 @@ function commentPhoto(photoId, message) {
     const {
       user: { token }
     } = getState();
-    fetch(`http://ssal.sparcs.org:16499/images/${photoId}/comments/`, {
+    fetch(`/images/${photoId}/comments/`, {
       method: "POST",
       headers: {
         Authorization: `JWT ${token}`,

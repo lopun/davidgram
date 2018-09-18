@@ -8,7 +8,7 @@ class Container extends Component {
 
   _handleSubmit = () => {
     const { input } = this.state;
-    fetch("http://ssal.sparcs.org:16499/rest-auth/password/reset/", {
+    fetch("http://localhost:16499/rest-auth/password/reset/", {
       method: "post",
       headers: {
         "Content-Type": "application/json"

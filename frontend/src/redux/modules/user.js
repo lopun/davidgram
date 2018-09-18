@@ -92,7 +92,7 @@ function setSimpleProfile(simpleUser) {
 // proxy에 해당하는 localhost:8000/users/login/facebook/으로 가게 된다.
 function facebookLogin(access_token) {
   return function(dispatch) {
-    fetch("http://ssal.sparcs.org:16499/users/login/facebook/", {
+    fetch("http://localhost:16499/users/login/facebook/", {
       method: "POST",
       headers: {
         "Content-type": "application/json"
@@ -115,7 +115,7 @@ function facebookLogin(access_token) {
 
 function usernameLogin(username, password) {
   return function(dispatch) {
-    fetch("http://ssal.sparcs.org:16499/rest-auth/login/", {
+    fetch("http://localhost:16499/rest-auth/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -138,7 +138,7 @@ function usernameLogin(username, password) {
 
 function createAccount(username, password, email, name) {
   return function(dispatch) {
-    fetch("http://ssal.sparcs.org:16499/rest-auth/registration/", {
+    fetch("http://localhost:16499/rest-auth/registration/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -168,7 +168,7 @@ function getPhotoLikes(photoId) {
     const {
       user: { token }
     } = getState();
-    fetch(`http://ssal.sparcs.org:16499/images/${photoId}/likes/`, {
+    fetch(`/images/${photoId}/likes/`, {
       headers: {
         Authorization: `JWT ${token}`
       }
@@ -191,7 +191,7 @@ function followUser(userId) {
     const {
       user: { token }
     } = getState();
-    fetch(`http://ssal.sparcs.org:16499/users/${userId}/follow/`, {
+    fetch(`/users/${userId}/follow/`, {
       method: "POST",
       headers: {
         Authorization: `JWT ${token}`,
@@ -213,7 +213,7 @@ function unfollowUser(userId) {
     const {
       user: { token }
     } = getState();
-    fetch(`http://ssal.sparcs.org:16499/users/${userId}/unfollow/`, {
+    fetch(`/users/${userId}/unfollow/`, {
       method: "POST",
       headers: {
         Authorization: `JWT ${token}`,
@@ -234,7 +234,7 @@ function getExplore() {
     const {
       user: { token }
     } = getState();
-    fetch(`http://ssal.sparcs.org:16499/users/explore/`, {
+    fetch(`/users/explore/`, {
       method: "GET",
       headers: {
         Authorization: `JWT ${token}`
@@ -266,14 +266,11 @@ function searchByTerm(searchTerm) {
 }
 
 function searchUsers(token, searchTerm) {
-  return fetch(
-    `http://ssal.sparcs.org:16499/users/search/?username=${searchTerm}`,
-    {
-      headers: {
-        Authorization: `JWT ${token}`
-      }
+  return fetch(`/users/search/?username=${searchTerm}`, {
+    headers: {
+      Authorization: `JWT ${token}`
     }
-  )
+  })
     .then(response => {
       if (response.status === 401) {
         return 401;
@@ -284,14 +281,11 @@ function searchUsers(token, searchTerm) {
 }
 
 function searchImages(token, searchTerm) {
-  return fetch(
-    `http://ssal.sparcs.org:16499/images/search/?hashtags=${searchTerm}`,
-    {
-      headers: {
-        Authorization: `JWT ${token}`
-      }
+  return fetch(`/images/search/?hashtags=${searchTerm}`, {
+    headers: {
+      Authorization: `JWT ${token}`
     }
-  )
+  })
     .then(response => {
       if (response.status === 401) {
         return 401;
@@ -306,7 +300,7 @@ function getNotifications() {
     const {
       user: { token }
     } = getState();
-    fetch("http://ssal.sparcs.org:16499/notifications/", {
+    fetch("http://localhost:16499/notifications/", {
       headers: {
         Authorization: `JWT ${token}`
       }
@@ -330,7 +324,7 @@ function getProfile() {
       user: { token, username }
     } = getState();
 
-    fetch(`http://ssal.sparcs.org:16499/users/${username}/`, {
+    fetch(`/users/${username}/`, {
       headers: {
         Authorization: `JWT ${token}`
       }
@@ -354,7 +348,7 @@ function getSimpleProfile() {
       user: { token, username }
     } = getState();
 
-    fetch(`http://ssal.sparcs.org:16499/users/${username}/simple/`, {
+    fetch(`/users/${username}/simple/`, {
       headers: {
         Authorization: `JWT ${token}`
       }
@@ -378,7 +372,7 @@ function setPassword(current_password, new_password) {
       user: { token, username }
     } = getState();
 
-    fetch(`http://ssal.sparcs.org:16499/users/${username}/password/`, {
+    fetch(`/users/${username}/password/`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
