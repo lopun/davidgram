@@ -37,7 +37,7 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG  # noqa F405
 # EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = 'ujin43255252@gmail.com'
 # # EMAIL_HOST_PASSWORD = 'password from https://security.google.com/settings/security/apppasswords'
-# EMAIL_HOST_PASSWORD = 'kjh5270!@#@!'
+# EMAIL_HOST_PASSWORD = ''
 # DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # django-debug-toolbar

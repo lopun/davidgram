@@ -158,6 +158,11 @@ typings/
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# Migration Files
+
+davidgram/users/migrations/
+davidgram/images/migrations/
+davidgram/notifications/migrations/
 
 
 
