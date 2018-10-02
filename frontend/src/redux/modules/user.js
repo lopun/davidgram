@@ -98,11 +98,9 @@ function facebookLogin(access_token) {
       headers: {
         "Content-Type": "application/json"
       },
-      data: {
-        body: JSON.stringify({
-          access_token
-        })
-      }
+      data: JSON.stringify({
+        access_token
+      })
     })
       .then(response => {
         if (response.data.token) {
@@ -121,12 +119,10 @@ function usernameLogin(username, password) {
       headers: {
         "Content-Type": "application/json"
       },
-      data: {
-        body: JSON.stringify({
-          username,
-          password
-        })
-      }
+      data: JSON.stringify({
+        username,
+        password
+      })
     })
       .then(response => {
         if (response.data.token) {
@@ -207,9 +203,8 @@ function followUser(userId) {
     }).then(response => {
       if (response.status === 401) {
         dispatch(logout());
-      } else if (!response.ok) {
-        dispatch(setunfollowUser(userId));
       }
+      dispatch(setunfollowUser(userId));
     });
   };
 }
@@ -230,9 +225,8 @@ function unfollowUser(userId) {
     }).then(response => {
       if (response.status === 401) {
         dispatch(logout());
-      } else if (!response.ok) {
-        dispatch(setfollowUser(userId));
       }
+      dispatch(setfollowUser(userId));
     });
   };
 }
@@ -343,7 +337,6 @@ function getProfile() {
           dispatch(logout());
         }
         dispatch(setProfile(response.data));
-        return;
       })
       .catch(err => console.log(err));
   };
