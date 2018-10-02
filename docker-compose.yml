@@ -4,8 +4,8 @@ services:
   db:
     container_name: davidgram_db
     image: postgres
-    # volumes:
-    #   - ./postgresql_data:/var/lib/postgresql/data
+    volumes:
+      - ./postgresql_data:/var/lib/postgresql/data
     restart: unless-stopped
 
   web:
