@@ -31,7 +31,7 @@ raven = "==6.6.0"
 django-storages = "==1.6.6"
 django-anymail = "==2.2"
 "argon2_cffi" = "==18.1.0"
-Django = "==2.0.4"
+Django = "==2.2.10"
 django-debug-toolbar = "*"
 django-extensions = "*"
 
